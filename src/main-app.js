@@ -1,49 +1,23 @@
 import { html } from 'lit-element';
-import { observable, action, makeObservable } from 'mobx';
 import { MobxLitElement } from '@adobe/lit-mobx';
 
-// create a mobx observable
-class Counter {
-  count = 0;
-
-  constructor() {
-    makeObservable(this, {
-      count: observable,
-      increment: action,
-    });
-  }
-
-  increment() {
-    this.count++;
-  }
-}
-
-// create instance that can be shared across components
-const counter = new Counter();
-
+import cmsPostStore from './store/cms-post';
 
 // create a new custom element, and use the base MobxLitElement class
 // alternatively you can use the MobxReactionUpdate mixin, e.g. `class MyElement extends MobxReactionUpdate(LitElement)`
 class MainApp extends MobxLitElement {
-  counter = counter;
-
-  // any observables accessed in the render method will now trigger an update
-  render() {
-    return html`
-      Count is ${this.counter.count}
-      <br />
-      <button @click=${this.incrementCount}>Add</button>
-    `;
-  }
+  cmsPost = cmsPostStore;
 
   firstUpdated() {
-    // you can update in first updated
-    this.counter.increment(); // value is now 1
+    this.cmsPost.fetchPostList({page: 1, pageSize: 10});
   }
 
-  incrementCount() {
-    // and you can trigger change in event callbacks
-    this.counter.increment(); // value is now n + 1
+  render() {
+    return html`
+      <pre>
+        ${this.cmsPost.postSummaryList?.[0]?.title}
+      </pre>
+    `;
   }
 }
 
