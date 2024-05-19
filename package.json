@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "rimraf dist && rollup -c rollup.config.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "dave.finton@gmail.com",
@@ -12,5 +13,16 @@
     "@lit/context": "^1.1.1",
     "lit": "^3.1.3",
     "mobx": "^6.12.3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@web/rollup-plugin-html": "^2.3.0",
+    "@web/rollup-plugin-import-meta-assets": "^2.2.1",
+    "babel-plugin-template-html-minifier": "^4.1.0",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.17.2",
+    "rollup-plugin-esbuild": "^6.1.1",
+    "rollup-plugin-workbox": "^8.1.0"
   }
 }

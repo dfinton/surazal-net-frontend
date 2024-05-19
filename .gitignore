@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+# output directory
+/dist
+
 # misc
 .DS_Store
 .env
