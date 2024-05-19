@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint && prettier \"**/*.js\" --check",
+    "format": "eslint --fix && prettier \"**.js\" --write",
     "build": "rimraf dist && rollup -c rollup.config.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
+    "start": "web-dev-server"
   },
   "author": "dave.finton@gmail.com",
   "license": "ISC",
@@ -17,9 +21,13 @@
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@web/dev-server": "^0.4.5",
     "@web/rollup-plugin-html": "^2.3.0",
     "@web/rollup-plugin-import-meta-assets": "^2.2.1",
     "babel-plugin-template-html-minifier": "^4.1.0",
+    "eslint": "^9.3.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
     "rimraf": "^5.0.5",
     "rollup": "^4.17.2",
     "rollup-plugin-esbuild": "^6.1.1",
