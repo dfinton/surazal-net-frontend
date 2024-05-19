@@ -4,6 +4,7 @@ import { rollupPluginHTML as html } from '@web/rollup-plugin-html';
 import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import minifier from 'babel-plugin-template-html-minifier';
 import path from 'path';
+import dotenv from 'rollup-plugin-dotenv';
 import esbuild from 'rollup-plugin-esbuild';
 import { generateSW } from 'rollup-plugin-workbox';
 
@@ -33,6 +34,7 @@ export default {
     }),
     /** Bundle assets references via import.meta.url */
     importMetaAssets(),
+    dotenv(),
     babel({
       plugins: [
         [
