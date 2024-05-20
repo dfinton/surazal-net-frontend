@@ -3,8 +3,6 @@ import { MobxLitElement } from "@adobe/lit-mobx";
 
 import cmsPostStore from "./store/cms-post";
 
-// create a new custom element, and use the base MobxLitElement class
-// alternatively you can use the MobxReactionUpdate mixin, e.g. `class MyElement extends MobxReactionUpdate(LitElement)`
 class MainApp extends MobxLitElement {
   cmsPost = cmsPostStore;
 
@@ -14,10 +12,9 @@ class MainApp extends MobxLitElement {
 
   render() {
     return html`
-      <pre>
+      <p>
         ${this.cmsPost.postSummaryList?.[0]?.title}
-      </pre
-      >
+      </p>
     `;
   }
 }
