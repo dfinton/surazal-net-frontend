@@ -1,5 +1,5 @@
-import { makeObservable, observable, action } from 'mobx';
-import cms from '../service/cms';
+import { makeObservable, observable, action } from "mobx";
+import cms from "../service/cms";
 
 class CmsPostStore {
   post = {};
@@ -34,7 +34,7 @@ class CmsPostStore {
     });
   }
 
-  async fetchPost({id}) {
+  async fetchPost({ id }) {
     if (this.post[id]) {
       return;
     }
@@ -87,7 +87,7 @@ class CmsPostStore {
       return;
     }
 
-    this.setPost({post: data.post});
+    this.setPost({ post: data.post });
   }
 
   async fetchLatestPost() {
@@ -138,11 +138,11 @@ class CmsPostStore {
 
     const [post] = data.posts;
 
-    this.setPost({post});
-    this.setLatestPostId({id: post.id});
+    this.setPost({ post });
+    this.setLatestPostId({ id: post.id });
   }
 
-  async fetchPostList({page, pageSize}) {
+  async fetchPostList({ page, pageSize }) {
     const take = pageSize;
     const skip = (page - 1) * pageSize;
 
@@ -169,9 +169,9 @@ class CmsPostStore {
 
     const posts = data?.data?.posts ?? [];
 
-    this.setPostSummaryList({postSummaryList: posts});
-    this.setPage({page});
-    this.setPageSize({pageSize});
+    this.setPostSummaryList({ postSummaryList: posts });
+    this.setPage({ page });
+    this.setPageSize({ pageSize });
   }
 
   async fetchPostCount() {
@@ -187,40 +187,40 @@ class CmsPostStore {
 
     const postCount = data.postsCount ?? 0;
 
-    this.setPostCount({postCount});
+    this.setPostCount({ postCount });
   }
 
   calculatePageCount() {
     const pageCount = Math.ceil(this.postCount / this.pageSize);
 
-    this.setPageCount({pageCount});
+    this.setPageCount({ pageCount });
   }
 
-  setLatestPostId({id}) {
+  setLatestPostId({ id }) {
     this.latestPostId = id;
   }
 
-  setPost({post}) {
+  setPost({ post }) {
     this.post[post.id] = post;
   }
 
-  setPostSummaryList({postSummaryList}) {
+  setPostSummaryList({ postSummaryList }) {
     this.postSummaryList = postSummaryList;
   }
 
-  setPostCount({postCount}) {
+  setPostCount({ postCount }) {
     this.postCount = postCount;
   }
 
-  setPage({page}) {
+  setPage({ page }) {
     this.page = page;
   }
 
-  setPageSize({pageSize}) {
+  setPageSize({ pageSize }) {
     this.pageSize = pageSize;
   }
 
-  setPageCount({pageCount}) {
+  setPageCount({ pageCount }) {
     this.pageCount = pageCount;
   }
 }

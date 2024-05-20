@@ -2,7 +2,7 @@ const url = `${process.env.CMS_API_URL}`;
 
 const cms = async (query) => {
   const options = {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify({ query }),
     headers: {
       "Content-Type": "application/json",
