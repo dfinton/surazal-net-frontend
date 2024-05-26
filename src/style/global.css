@@ -3,8 +3,8 @@
  */
 :root {
   --body-background-color: black;
-  --dark-background-color: #655545;
-  --light-background-color: #453525;
+  --light-background-color: #655545;
+  --dark-background-color: #453525;
   --text-color: #e0e0e0;
   --link-color: #e0e080;
 }
@@ -45,21 +45,35 @@ h1, h2, h3, h4, h5, h6 {
   text-align: right;
 }
 
-.root-container {
-  width: 100%;
-  margin: 0.25rem;
+.root-page {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.root-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.125rem;
   border-radius: 0.25rem;
   overflow: hidden;
 }
 
+.content {
+  margin: 0.5rem;
+}
+
 .light-container {
   background-color: var(--light-background-color);
-  width: 100%;
 }
 
 .dark-container {
   background-color: var(--dark-background-color);
-  width: 100%;
 }
 
 

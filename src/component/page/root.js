@@ -8,7 +8,7 @@ import "./header";
 class PageRoot extends LightLitElement {
   render() {
     return html`
-      <div class="root-container">
+      <div class="root-page">
         <page-header></page-header>
         <page-footer></page-footer>
       </div>

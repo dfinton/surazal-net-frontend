@@ -5,8 +5,17 @@ import LightMobxLitElement from "../base/light-mobx-lit-element";
 class PageHeader extends LightMobxLitElement {
   render() {
     return html`
-      <div class="light-container">
-        This is a header
+      <div class="root-section">
+        <div class="light-container">
+          <div class="content">
+            This is a header
+          </div>
+        </div>
+        <div class="dark-container">
+          <div class="content">
+            This is a subheaderer
+          </div>
+        </div>
       </div>
     `;
   }
