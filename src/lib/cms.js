@@ -4,21 +4,24 @@ const textAlignClassName = (textAlign) => {
   let className;
 
   switch (textAlign) {
-    case 'center':
-      className = 'center';
+    case "center":
+      className = "center";
       break;
-    case 'end':
-      className = 'right';
+    case "end":
+      className = "right";
       break;
     default:
-      className = 'left';
+      className = "left";
       break;
   }
 
   return className;
-}
+};
 
-const convertDocumentObjectToElement = ({documentObject, documentObjectIndex}) => {
+const convertDocumentObjectToElement = ({
+  documentObject,
+  documentObjectIndex,
+}) => {
   if (documentObject.children) {
     let childrenHtml = documentObject.children.map((child, childIndex) => {
       return convertDocumentObjectToElement({
@@ -29,79 +32,104 @@ const convertDocumentObjectToElement = ({documentObject, documentObjectIndex}) =
 
     const textAlign = textAlignClassName(documentObject.textAlign);
 
-    if (documentObject.type === 'paragraph') {
-      return html`<p class=${textAlign} key=${documentObjectIndex}>${childrenHtml}</p>`
+    if (documentObject.type === "paragraph") {
+      return html`<p class=${textAlign} key=${documentObjectIndex}>
+        ${childrenHtml}
+      </p>`;
     }
 
-    if (documentObject.type === 'blockquote') {
-      return html`<blockquote key=${documentObjectIndex}>${childrenHtml}</blockquote>`
+    if (documentObject.type === "blockquote") {
+      return html`<blockquote key=${documentObjectIndex}>
+        ${childrenHtml}
+      </blockquote>`;
     }
 
-    if (documentObject.type === 'link') {
-      return (html`
+    if (documentObject.type === "link") {
+      return html`
         <a
           key=${documentObjectIndex}
           href=${documentObject.href}
           target="_blank"
           rel="noreferrer"
-        >${childrenHtml}</a>
-      `);
+          >${childrenHtml}</a
+        >
+      `;
     }
 
-    if (documentObject.type === 'heading') {
+    if (documentObject.type === "heading") {
       switch (documentObject.level) {
         case 1:
-          return html`<h1 class=${textAlign} key=${documentObjectIndex}>${childrenHtml}</h1>`
+          return html`<h1 class=${textAlign} key=${documentObjectIndex}>
+            ${childrenHtml}
+          </h1>`;
         case 2:
-          return html`<h2 class=${textAlign} key=${documentObjectIndex}>${childrenHtml}</h2>`
+          return html`<h2 class=${textAlign} key=${documentObjectIndex}>
+            ${childrenHtml}
+          </h2>`;
         case 3:
-          return html`<h3 class=${textAlign} key=${documentObjectIndex}>${childrenHtml}</h3>`
+          return html`<h3 class=${textAlign} key=${documentObjectIndex}>
+            ${childrenHtml}
+          </h3>`;
         case 4:
-          return html`<h4 class=${textAlign} key=${documentObjectIndex}>${childrenHtml}</h4>`
+          return html`<h4 class=${textAlign} key=${documentObjectIndex}>
+            ${childrenHtml}
+          </h4>`;
         case 5:
-          return html`<h5 class=${textAlign} key=${documentObjectIndex}>${childrenHtml}</h5>`
+          return html`<h5 class=${textAlign} key=${documentObjectIndex}>
+            ${childrenHtml}
+          </h5>`;
         case 6:
-          return html`<h6 class=${textAlign} key=${documentObjectIndex}>${childrenHtml}</h6>`
+          return html`<h6 class=${textAlign} key=${documentObjectIndex}>
+            ${childrenHtml}
+          </h6>`;
         default:
       }
     }
 
-    if (documentObject.type === 'code') {
-      return html`<pre key=${documentObjectIndex}>${childrenHtml}</pre>`
+    if (documentObject.type === "code") {
+      return html`<pre key=${documentObjectIndex}>${childrenHtml}</pre>`;
     }
 
-    if (documentObject.type === 'divider') {
-      return html`<hr key=${documentObjectIndex} />`
+    if (documentObject.type === "divider") {
+      return html`<hr key=${documentObjectIndex} />`;
     }
 
-    if (documentObject.type === 'unordered-list') {
-      return html`<ul key=${documentObjectIndex}>${childrenHtml}</ul>`
+    if (documentObject.type === "unordered-list") {
+      return html`<ul key=${documentObjectIndex}>
+        ${childrenHtml}
+      </ul>`;
     }
 
-    if (documentObject.type === 'ordered-list') {
-      return html`<ol key=${documentObjectIndex}>${childrenHtml}</ol>`
+    if (documentObject.type === "ordered-list") {
+      return html`<ol key=${documentObjectIndex}>
+        ${childrenHtml}
+      </ol>`;
     }
 
-    if (documentObject.type === 'list-item') {
-      return html`<li key=${documentObjectIndex}>${childrenHtml}</li>`
+    if (documentObject.type === "list-item") {
+      return html`<li key=${documentObjectIndex}>${childrenHtml}</li>`;
     }
 
-    if (documentObject.type === 'layout') {
-      const layoutSubclass = html`layout-${documentObject.layout.join('-')}`;
+    if (documentObject.type === "layout") {
+      const layoutSubclass = html`layout-${documentObject.layout.join("-")}`;
 
       return html`
         <div
-          class=${['layout', layoutSubclass].join(' ')}
-          key=${documentObjectIndex}>${childrenHtml}
+          class=${["layout", layoutSubclass].join(" ")}
+          key=${documentObjectIndex}
+        >
+          ${childrenHtml}
         </div>
-      `
+      `;
     }
 
-    if (documentObject.type === 'layout-area') {
-      return html`<div class="layout-area" key=${documentObjectIndex}>${childrenHtml}</div>`
+    if (documentObject.type === "layout-area") {
+      return html`<div class="layout-area" key=${documentObjectIndex}>
+        ${childrenHtml}
+      </div>`;
     }
 
-    return html`<div key=${documentObjectIndex}>${childrenHtml}</div>`
+    return html`<div key=${documentObjectIndex}>${childrenHtml}</div>`;
   }
 
   let documentElement = documentObject.text;
@@ -139,8 +167,6 @@ const convertDocumentObjectToElement = ({documentObject, documentObjectIndex}) =
   }
 
   return html`<span key=${documentObjectIndex}>${documentElement}</span>`;
-}
-
-export {
-  convertDocumentObjectToElement,
 };
+
+export { convertDocumentObjectToElement };

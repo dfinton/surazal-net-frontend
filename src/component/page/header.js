@@ -2,12 +2,12 @@ import { html, LitElement } from "lit-element";
 
 import LightMobxLitElement from "../base/light-mobx-lit-element";
 import cmsPageStore from "../../store/cms-page";
-import { convertDocumentObjectToElement } from '../../lib/cms';
+import { convertDocumentObjectToElement } from "../../lib/cms";
 
 class PageHeader extends LightMobxLitElement {
-  static sectionSlug = 'page-header';
+  static sectionSlug = "page-header";
 
-  cmsPageStore = cmsPageStore
+  cmsPageStore = cmsPageStore;
 
   async firstUpdated() {
     await cmsPageStore.fetchPage({ sectionSlug: PageHeader.sectionSlug });
@@ -33,14 +33,10 @@ class PageHeader extends LightMobxLitElement {
     return html`
       <div class="root-section">
         <div class="light-container">
-          <div class="content">
-            ${htmlContent}
-          </div>
+          <div class="content">${htmlContent}</div>
         </div>
         <div class="dark-container">
-          <div class="content">
-            This is a subheaderer
-          </div>
+          <div class="content">This is a subheaderer</div>
         </div>
       </div>
     `;

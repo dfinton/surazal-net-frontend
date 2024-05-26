@@ -6,9 +6,7 @@ class PageFooter extends LightMobxLitElement {
   render() {
     return html`
       <div class="root-section light-container">
-        <div class="content">
-          This is a footer
-        </div>
+        <div class="content">This is a footer</div>
       </div>
     `;
   }
