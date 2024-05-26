@@ -1,3 +1,6 @@
+/**
+ * Global variables
+ */
 :root {
   --body-background-color: black;
   --dark-background-color: #655545;
@@ -6,6 +9,9 @@
   --link-color: #e0e080;
 }
 
+/**
+ * Styles that apply to common elements
+ */
 html, body {
   background-color: var(--body-background-color);
   color: var(--text-color);
@@ -24,6 +30,9 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0.25rem 0 0 0;
 }
 
+/**
+ * Top-level styles that apply to general classes
+ */
 .left {
   text-align: left;
 }
@@ -35,3 +44,22 @@ h1, h2, h3, h4, h5, h6 {
 .right {
   text-align: right;
 }
+
+.root-container {
+  width: 100%;
+  margin: 0.25rem;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.light-container {
+  background-color: var(--light-background-color);
+  width: 100%;
+}
+
+.dark-container {
+  background-color: var(--dark-background-color);
+  width: 100%;
+}
+
+
