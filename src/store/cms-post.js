@@ -1,5 +1,5 @@
 import { makeObservable, observable, action } from "mobx";
-import cms from "../service/cms";
+import cms from "@/service/cms";
 
 class CmsPostStore {
   post = {};
