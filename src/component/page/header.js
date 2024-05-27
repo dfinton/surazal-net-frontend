@@ -20,13 +20,12 @@ class PageHeader extends LightMobxLitElement {
     let htmlContent;
 
     if (content) {
-      htmlContent = content.map((postDocument, postDocumentIndex) => {
-        const postElement = convertDocumentObjectToElement({
-          documentObject: postDocument,
-          documentObjectIndex: postDocumentIndex,
+      htmlContent = content.map((pageDocument) => {
+        const pageElement = convertDocumentObjectToElement({
+          documentObject: pageDocument,
         });
 
-        return html`<div key=${postDocumentIndex}>${postElement}</div>`;
+        return html`<div>${pageElement}</div>`;
       });
     }
 
