@@ -52,7 +52,7 @@ class PageHeader extends ConvertDocumentObjectToElement(LightMobxLitElement) {
     }
 
     if (linkLabel) {
-      linkLabelContent = html`<span>${linkLabel}</span>`
+      linkLabelContent = html`<h3>${linkLabel}</h3>`
     }
 
     if (linkList) {
@@ -72,7 +72,7 @@ class PageHeader extends ConvertDocumentObjectToElement(LightMobxLitElement) {
         </div>
         <div class="dark-container">
           <div class="content center">
-            <strong>${linkLabelContent}</strong>
+            ${linkLabelContent}
             <div class="horizontal-list">
               <ul>${linkContent}</ul>
             </div>
