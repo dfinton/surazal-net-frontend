@@ -69,7 +69,7 @@ class CmsPageStore {
     const sectionSlug = page.section?.slug;
 
     if (sectionSlug) {
-      this.page[page.section.slug] = page;
+      this.page[sectionSlug] = page;
     }
   }
 }
