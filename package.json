@@ -32,7 +32,6 @@
     "rimraf": "^5.0.5",
     "rollup": "^4.17.2",
     "rollup-plugin-dotenv": "^0.5.1",
-    "rollup-plugin-esbuild": "^6.1.1",
-    "rollup-plugin-workbox": "^8.1.0"
+    "rollup-plugin-esbuild": "^6.1.1"
   }
 }
