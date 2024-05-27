@@ -18,9 +18,7 @@ const textAlignClassName = (textAlign) => {
   return className;
 };
 
-const convertDocumentObjectToElement = ({
-  documentObject,
-}) => {
+const convertDocumentObjectToElement = ({ documentObject }) => {
   if (documentObject.children) {
     let childrenHtml = documentObject.children.map((child, childIndex) => {
       return convertDocumentObjectToElement({
@@ -31,23 +29,16 @@ const convertDocumentObjectToElement = ({
     const textAlign = textAlignClassName(documentObject.textAlign);
 
     if (documentObject.type === "paragraph") {
-      return html`<p class=${textAlign}>
-        ${childrenHtml}
-      </p>`;
+      return html`<p class=${textAlign}>${childrenHtml}</p>`;
     }
 
     if (documentObject.type === "blockquote") {
-      return html`<blockquote>
-        ${childrenHtml}
-      </blockquote>`;
+      return html`<blockquote>${childrenHtml}</blockquote>`;
     }
 
     if (documentObject.type === "link") {
       return html`
-        <a
-          href=${documentObject.href}
-          target="_blank"
-          rel="noreferrer"
+        <a href=${documentObject.href} target="_blank" rel="noreferrer"
           >${childrenHtml}</a
         >
       `;
@@ -56,29 +47,17 @@ const convertDocumentObjectToElement = ({
     if (documentObject.type === "heading") {
       switch (documentObject.level) {
         case 1:
-          return html`<h1 class=${textAlign}>
-            ${childrenHtml}
-          </h1>`;
+          return html`<h1 class=${textAlign}>${childrenHtml}</h1>`;
         case 2:
-          return html`<h2 class=${textAlign}>
-            ${childrenHtml}
-          </h2>`;
+          return html`<h2 class=${textAlign}>${childrenHtml}</h2>`;
         case 3:
-          return html`<h3 class=${textAlign}>
-            ${childrenHtml}
-          </h3>`;
+          return html`<h3 class=${textAlign}>${childrenHtml}</h3>`;
         case 4:
-          return html`<h4 class=${textAlign}>
-            ${childrenHtml}
-          </h4>`;
+          return html`<h4 class=${textAlign}>${childrenHtml}</h4>`;
         case 5:
-          return html`<h5 class=${textAlign}>
-            ${childrenHtml}
-          </h5>`;
+          return html`<h5 class=${textAlign}>${childrenHtml}</h5>`;
         case 6:
-          return html`<h6 class=${textAlign}>
-            ${childrenHtml}
-          </h6>`;
+          return html`<h6 class=${textAlign}>${childrenHtml}</h6>`;
         default:
       }
     }
@@ -111,18 +90,12 @@ const convertDocumentObjectToElement = ({
       const layoutSubclass = html`layout-${documentObject.layout.join("-")}`;
 
       return html`
-        <div
-          class=${["layout", layoutSubclass].join(" ")}
-        >
-          ${childrenHtml}
-        </div>
+        <div class=${["layout", layoutSubclass].join(" ")}>${childrenHtml}</div>
       `;
     }
 
     if (documentObject.type === "layout-area") {
-      return html`<div class="layout-area">
-        ${childrenHtml}
-      </div>`;
+      return html`<div class="layout-area">${childrenHtml}</div>`;
     }
 
     return html`<div>${childrenHtml}</div>`;
