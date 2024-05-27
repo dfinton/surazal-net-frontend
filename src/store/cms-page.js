@@ -21,34 +21,40 @@ class CmsPageStore {
 
     this.pendingRequests.add(sectionSlug);
 
-    const response = await cms(`
-      {
-        pages(
-          where: {
-            section: {
-              slug: {
-                equals: "${sectionSlug}"
+    let response;
+
+    try {
+      response = await cms(`
+        {
+          pages(
+            where: {
+              section: {
+                slug: {
+                  equals: "${sectionSlug}"
+                }
               }
             }
-          }
-          orderBy: {
-            createdAt: desc
-          }
-          take: 1
-          skip: 0
-        ) {
-          id
-          content {
-            document
-          }
-          section {
-            slug
+            orderBy: {
+              createdAt: desc
+            }
+            take: 1
+            skip: 0
+          ) {
+            id
+            content {
+              document
+            }
+            section {
+              slug
+            }
           }
         }
-      }
-    `);
-
-    this.pendingRequests.delete(sectionSlug);
+      `);
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      this.pendingRequests.delete(sectionSlug);
+    }
 
     const { data } = response;
 
