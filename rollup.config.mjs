@@ -9,7 +9,7 @@ import esbuild from 'rollup-plugin-esbuild';
 import { generateSW } from 'rollup-plugin-workbox';
 
 export default {
-  input: 'index.html',
+  input: '**/*.html',
   output: {
     entryFileNames: '[hash].js',
     chunkFileNames: '[hash].js',
@@ -24,6 +24,8 @@ export default {
       minify: true,
       injectServiceWorker: true,
       serviceWorkerPath: 'dist/sw.js',
+      rootDir: path.join(process.cwd(), 'page'),
+      flattenOutput: false,
     }),
     /** Resolve bare module imports */
     nodeResolve(),
