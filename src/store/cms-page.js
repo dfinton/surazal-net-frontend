@@ -3,19 +3,23 @@ import cms from "../service/cms";
 
 class CmsPageStore {
   page = {};
+  pendingRequests = new Set();
 
   constructor() {
     makeObservable(this, {
       page: observable,
+      pendingRequests: observable,
       fetchPage: action,
       setPage: action,
     });
   }
 
   async fetchPage({ sectionSlug }) {
-    if (this.page[sectionSlug]) {
+    if (this.page[sectionSlug] || this.pendingRequests.has(sectionSlug)) {
       return;
     }
+
+    this.pendingRequests.add(sectionSlug);
 
     const response = await cms(`
       {
@@ -43,6 +47,8 @@ class CmsPageStore {
         }
       }
     `);
+
+    this.pendingRequests.delete(sectionSlug);
 
     const { data } = response;
 
