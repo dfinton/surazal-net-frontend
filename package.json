@@ -24,6 +24,7 @@
     "@web/dev-server": "^0.4.5",
     "@web/rollup-plugin-html": "^2.3.0",
     "@web/rollup-plugin-import-meta-assets": "^2.2.1",
+    "babel-plugin-module-resolver": "^5.0.2",
     "babel-plugin-template-html-minifier": "^4.1.0",
     "eslint": "^9.3.0",
     "eslint-config-prettier": "^9.1.0",

@@ -1,8 +1,8 @@
 import { html, LitElement } from "lit-element";
 
-import LightMobxLitElement from "../base/light-mobx-lit-element";
-import cmsPageStore from "../../store/cms-page";
-import ConvertDocumentObjectToElement from "../../mixin/convert-cms-document-object";
+import LightMobxLitElement from "@/component/base/light-mobx-lit-element";
+import cmsPageStore from "@/store/cms-page";
+import ConvertDocumentObjectToElement from "@/mixin/convert-cms-document-object";
 
 class PageHeader extends ConvertDocumentObjectToElement(LightMobxLitElement) {
   static sectionSlug = "page-header";

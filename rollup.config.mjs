@@ -38,6 +38,7 @@ export default {
     importMetaAssets(),
     dotenv(),
     babel({
+      babelHelpers: "bundled",
       plugins: [
         [
           minifier,
@@ -51,6 +52,14 @@ export default {
               removeComments: true,
               caseSensitive: true,
               minifyCSS: true,
+            },
+          },
+        ],
+        [
+          "module-resolver",
+          {
+            alias: {
+              "^@/(.+)": "./src/\\1",
             },
           },
         ],
