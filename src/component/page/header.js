@@ -2,9 +2,9 @@ import { html, LitElement } from "lit-element";
 
 import LightMobxLitElement from "../base/light-mobx-lit-element";
 import cmsPageStore from "../../store/cms-page";
-import { convertDocumentObjectToElement } from "../../lib/cms";
+import ConvertDocumentObjectToElement from "../../mixin/convert-cms-document-object";
 
-class PageHeader extends LightMobxLitElement {
+class PageHeader extends ConvertDocumentObjectToElement(LightMobxLitElement) {
   static sectionSlug = "page-header";
 
   cmsPageStore = cmsPageStore;
@@ -21,7 +21,7 @@ class PageHeader extends LightMobxLitElement {
 
     if (content) {
       htmlContent = content.map((pageDocument) => {
-        const pageElement = convertDocumentObjectToElement({
+        const pageElement = this.convertDocumentObjectToElement({
           documentObject: pageDocument,
         });
 
