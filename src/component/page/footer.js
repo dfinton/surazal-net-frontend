@@ -46,7 +46,7 @@ class PageFooter extends ConvertDocumentObjectToElement(LightMobxLitElement) {
 
     let htmlContent;
     let siteLinkContent;
-    // let socialLinkContent;
+    let socialLinkContent;
     let siteLinkLabelContent;
     let socialLinkLabelContent;
 
@@ -77,6 +77,17 @@ class PageFooter extends ConvertDocumentObjectToElement(LightMobxLitElement) {
         `,
       );
     }
+
+    if (socialLinkList) {
+      socialLinkContent = socialLinkList.map(
+        (socialLink) => html`
+          <li>
+            <a href="${socialLink.url}">${socialLink.label}</a>
+          </li>
+        `,
+      );
+    }
+
     return html`
       <div class="root-section dark-container">
         <div class="content column-layout">
@@ -91,9 +102,14 @@ class PageFooter extends ConvertDocumentObjectToElement(LightMobxLitElement) {
               </ul>
             </div>
           </div>
-          <div class="content center">
+          <div class="content left">
             <div class="content">
               <h3>${socialLinkLabel}</h3>
+            </div>
+            <div class="content">
+              <ul class="undecorated-list">
+                ${socialLinkContent}
+              </ul>
             </div>
           </div>
         </div>
