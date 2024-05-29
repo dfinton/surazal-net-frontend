@@ -1,4 +1,4 @@
-import { html, css, LitElement } from "lit-element";
+import { html, LitElement } from "lit-element";
 
 import LightMobxLitElement from "@/component/base/light-mobx-lit-element";
 import cmsPageStore from "@/store/cms-page";
@@ -23,10 +23,12 @@ class PageHeader extends ConvertDocumentObjectToElement(LightMobxLitElement) {
       this.cmsLinkStore.fetchLink({ slug: PageHeader.linkSlug }),
     ]);
 
-    fetchStoreData
-      .catch((error) => {
-        console.error("An error was encounter fetching page data", error.message);
-      });
+    fetchStoreData.catch((error) => {
+      console.error(
+        "An error was encountered fetching page header data",
+        error.message,
+      );
+    });
   }
 
   render() {
@@ -52,17 +54,17 @@ class PageHeader extends ConvertDocumentObjectToElement(LightMobxLitElement) {
     }
 
     if (linkLabel) {
-      linkLabelContent = html`<h3>${linkLabel}</h3>`
+      linkLabelContent = html`<h3>${linkLabel}</h3>`;
     }
 
     if (linkList) {
-      linkContent = linkList.map((link) =>
-        html`
+      linkContent = linkList.map(
+        (link) => html`
           <li>
             <a href="${link.url}">${link.label}</a>
           </li>
-        `
-      )
+        `,
+      );
     }
 
     return html`
@@ -72,9 +74,11 @@ class PageHeader extends ConvertDocumentObjectToElement(LightMobxLitElement) {
         </div>
         <div class="dark-container">
           <div class="content center">
-            ${linkLabelContent}
-            <div class="horizontal-list">
-              <ul>${linkContent}</ul>
+            <div>${linkLabelContent}</div>
+            <div class="content">
+              <ul class="horizontal-list">
+                ${linkContent}
+              </ul>
             </div>
           </div>
         </div>

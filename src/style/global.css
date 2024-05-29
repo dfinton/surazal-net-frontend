@@ -46,23 +46,29 @@ h1, h2, h3, h4, h5, h6 {
   text-align: right;
 }
 
-.horizontal-list {
-}
-
-.horizontal-list > ul {
+ul.horizontal-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.horizontal-list > ul > li {
+ul.horizontal-list > li {
   display: inline;
 }
 
-.horizontal-list > ul > li:not(:first-child)::before {
+ul.horizontal-list > li:not(:first-child)::before {
   content: "•";
   margin-right: 0.25rem;
   margin-left: 0.25rem;
+}
+
+ul.undecorated-list {
+  padding: 0;
+  margin: 0;
+}
+
+ul.undecorated-list > li {
+  list-style-type: none;
 }
 
 .root-page {
@@ -97,4 +103,11 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--dark-background-color);
 }
 
+.column-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 1rem;
+}
 
