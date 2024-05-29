@@ -1,29 +1,24 @@
-import { html, LitElement } from "lit-element";
+import { html } from "lit-element";
 
 import LightMobxLitElement from "@/component/base/light-mobx-lit-element";
 import cmsPageStore from "@/store/cms-page";
 import cmsLinkStore from "@/store/cms-link";
 import ConvertDocumentObjectToElement from "@/mixin/convert-cms-document-object";
 
+import "@/component/common/content";
+
 class PageHeader extends ConvertDocumentObjectToElement(LightMobxLitElement) {
   static sectionSlug = "page-header";
   static linkSlug = "site-links";
 
-  cmsPageStore;
   cmsLinkStore;
 
   constructor() {
     super();
 
-    this.cmsPageStore = cmsPageStore;
     this.cmsLinkStore = cmsLinkStore;
 
-    const fetchStoreData = Promise.all([
-      this.cmsPageStore.fetchPage({ sectionSlug: PageHeader.sectionSlug }),
-      this.cmsLinkStore.fetchLink({ slug: PageHeader.linkSlug }),
-    ]);
-
-    fetchStoreData.catch((error) => {
+    this.cmsLinkStore.fetchLink({ slug: PageHeader.linkSlug }).catch((error) => {
       console.error(
         "An error was encountered fetching page header data",
         error.message,
@@ -32,26 +27,13 @@ class PageHeader extends ConvertDocumentObjectToElement(LightMobxLitElement) {
   }
 
   render() {
-    const page = this.cmsPageStore.page[PageHeader.sectionSlug];
     const link = this.cmsLinkStore.link[PageHeader.linkSlug];
 
-    const content = page?.content?.document;
     const linkLabel = link?.label;
     const linkList = link?.linkList;
 
-    let htmlContent;
     let linkContent;
     let linkLabelContent;
-
-    if (content) {
-      htmlContent = content.map((pageDocument) => {
-        const pageElement = this.convertDocumentObjectToElement({
-          documentObject: pageDocument,
-        });
-
-        return html`<div>${pageElement}</div>`;
-      });
-    }
 
     if (linkLabel) {
       linkLabelContent = html`<h3>${linkLabel}</h3>`;
@@ -70,7 +52,7 @@ class PageHeader extends ConvertDocumentObjectToElement(LightMobxLitElement) {
     return html`
       <div class="root-section">
         <div class="light-container">
-          <div class="content">${htmlContent}</div>
+          <page-content section="${PageHeader.sectionSlug}"></page-content>
         </div>
         <div class="dark-container">
           <div class="content center">
