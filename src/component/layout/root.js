@@ -2,8 +2,8 @@ import { html } from "lit-element";
 
 import LightLitElement from "@/component/base/light-lit-element";
 
-import "@/component/page/footer";
-import "@/component/page/header";
+import "@/component/layout/footer";
+import "@/component/layout/header";
 
 class PageRoot extends LightLitElement {
   render() {
