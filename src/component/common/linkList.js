@@ -16,6 +16,7 @@ class LinkList extends MobxLitElement {
   static styles = [commonElementStyle, layoutStyle, listStyle, utilityStyle];
 
   linkList;
+  listStyle;
   cmsLinkStore;
 
   connectedCallback() {
