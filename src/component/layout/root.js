@@ -4,6 +4,8 @@ import rootStyle from "@/style/root";
 
 import "@/component/common/footer";
 import "@/component/common/header";
+import "@/component/common/content";
+import "@/component/common/linkList";
 
 class PageRoot extends LitElement {
   static styles = [rootStyle];
@@ -11,8 +13,18 @@ class PageRoot extends LitElement {
   render() {
     return html`
       <div class="root-page">
-        <page-header></page-header>
-        <page-footer></page-footer>
+        <page-header>
+          <page-content slot="header" section="page-header"></page-content>
+          <link-list slot="subheader" linkList="site-links" listStyle="horizontal"></link-list>
+        </page-header>
+        <page-footer>
+          <page-content section="page-footer"></page-content>
+          <link-list linkList="site-links" listStyle="undecorated"></link-list>
+          <link-list
+            linkList="social-links"
+            listStyle="undecorated"
+          ></link-list>
+        </page-footer>
       </div>
     `;
   }

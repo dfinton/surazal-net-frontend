@@ -2,9 +2,6 @@ import { html, LitElement } from "lit-element";
 
 import rootStyle from "@/style/root";
 
-import "@/component/common/content";
-import "@/component/common/linkList";
-
 class PageHeader extends LitElement {
   static styles = [rootStyle];
 
@@ -12,10 +9,10 @@ class PageHeader extends LitElement {
     return html`
       <div class="root-section">
         <div class="light-container">
-          <page-content section="page-header"></page-content>
+          <slot name="header"></slot>
         </div>
         <div class="dark-container">
-          <link-list linkList="site-links" listStyle="horizontal"></link-list>
+          <slot name="subheader"></slot>
         </div>
       </div>
     `;
