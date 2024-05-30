@@ -15,7 +15,11 @@ class PageRoot extends LitElement {
       <div class="root-page">
         <page-header>
           <page-content slot="header" section="page-header"></page-content>
-          <link-list slot="subheader" linkList="site-links" listStyle="horizontal"></link-list>
+          <link-list
+            slot="subheader"
+            linkList="site-links"
+            listStyle="horizontal"
+          ></link-list>
         </page-header>
         <page-footer>
           <page-content section="page-footer"></page-content>
