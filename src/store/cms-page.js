@@ -62,7 +62,7 @@ class CmsPageStore {
 
     const { data } = response;
 
-    if (!data.pages) {
+    if (!data?.pages?.length) {
       return;
     }
 
