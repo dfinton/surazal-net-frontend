@@ -15,12 +15,14 @@ class PageContent extends ConvertDocumentObjectToElement(LightMobxLitElement) {
   connectedCallback() {
     super.connectedCallback();
 
-    this.cmsPageStore.fetchPage({ sectionSlug: this.section }).catch((error) => {
-      console.error(
-        `An error was encountered fetching page content data for section "${this.section}":\n`,
-        error.message,
-      );
-    });
+    this.cmsPageStore
+      .fetchPage({ sectionSlug: this.section })
+      .catch((error) => {
+        console.error(
+          `An error was encountered fetching page content data for section "${this.section}":\n`,
+          error.message,
+        );
+      });
   }
 
   willUpdate(changedProperties) {
@@ -28,13 +30,15 @@ class PageContent extends ConvertDocumentObjectToElement(LightMobxLitElement) {
       return;
     }
 
-    if (changedProperties.has('section')) {
-      this.cmsPageStore.fetchPage({ sectionSlug: this.section }).catch((error) => {
-        console.error(
-          `An error was encountered fetching page content data for section "${this.section}":\n`,
-          error.message,
-        );
-      });
+    if (changedProperties.has("section")) {
+      this.cmsPageStore
+        .fetchPage({ sectionSlug: this.section })
+        .catch((error) => {
+          console.error(
+            `An error was encountered fetching page content data for section "${this.section}":\n`,
+            error.message,
+          );
+        });
     }
   }
 
@@ -60,11 +64,7 @@ class PageContent extends ConvertDocumentObjectToElement(LightMobxLitElement) {
       });
     }
 
-    return html`
-      <div class="content">
-        ${htmlContent}
-      </div>
-    `;
+    return html` <div class="content">${htmlContent}</div> `;
   }
 }
 
