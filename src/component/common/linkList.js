@@ -1,13 +1,19 @@
 import { html } from "lit-element";
+import { MobxLitElement } from "@adobe/lit-mobx";
 
-import LightMobxLitElement from "@/component/base/light-mobx-lit-element";
 import cmsLinkStore from "@/store/cms-link";
+import commonElementStyle from "@/style/common-element";
+import layoutStyle from "@/style/layout";
+import listStyle from "@/style/list";
+import utilityStyle from "@/style/utility";
 
-class LinkList extends LightMobxLitElement {
+class LinkList extends MobxLitElement {
   static properties = {
     linkList: {},
     listStyle: {},
   };
+
+  static styles = [commonElementStyle, layoutStyle, listStyle, utilityStyle];
 
   linkList;
   cmsLinkStore;

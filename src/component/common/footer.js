@@ -1,11 +1,14 @@
-import { html } from "lit-element";
+import { html, LitElement } from "lit-element";
 
-import LightMobxLitElement from "@/component/base/light-mobx-lit-element";
+import layoutStyle from "@/style/layout";
+import rootStyle from "@/style/root";
 
 import "@/component/common/content";
 import "@/component/common/linkList";
 
-class PageFooter extends LightMobxLitElement {
+class PageFooter extends LitElement {
+  static styles = [rootStyle, layoutStyle];
+
   render() {
     return html`
       <div class="root-section dark-container">

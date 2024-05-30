@@ -1,11 +1,13 @@
-import { html } from "lit-element";
+import { html, LitElement } from "lit-element";
 
-import LightLitElement from "@/component/base/light-lit-element";
+import rootStyle from "@/style/root";
 
 import "@/component/common/footer";
 import "@/component/common/header";
 
-class PageRoot extends LightLitElement {
+class PageRoot extends LitElement {
+  static styles = [rootStyle];
+
   render() {
     return html`
       <div class="root-page">

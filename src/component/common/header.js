@@ -1,11 +1,13 @@
-import { html } from "lit-element";
+import { html, LitElement } from "lit-element";
 
-import LightMobxLitElement from "@/component/base/light-mobx-lit-element";
+import rootStyle from "@/style/root";
 
 import "@/component/common/content";
 import "@/component/common/linkList";
 
-class PageHeader extends LightMobxLitElement {
+class PageHeader extends LitElement {
+  static styles = [rootStyle];
+
   render() {
     return html`
       <div class="root-section">

@@ -1,13 +1,18 @@
 import { html } from "lit-element";
+import { MobxLitElement } from "@adobe/lit-mobx";
 
-import LightMobxLitElement from "@/component/base/light-mobx-lit-element";
-import cmsPageStore from "@/store/cms-page";
 import ConvertDocumentObjectToElement from "@/mixin/convert-cms-document-object";
+import cmsPageStore from "@/store/cms-page";
+import commonElementStyle from "@/style/common-element";
+import layoutStyle from "@/style/layout";
+import utilityStyle from "@/style/utility";
 
-class PageContent extends ConvertDocumentObjectToElement(LightMobxLitElement) {
+class PageContent extends ConvertDocumentObjectToElement(MobxLitElement) {
   static properties = {
     section: {},
   };
+
+  static styles = [commonElementStyle, layoutStyle, utilityStyle];
 
   cmsPageStore;
   section;
