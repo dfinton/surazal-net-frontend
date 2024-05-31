@@ -9,6 +9,7 @@ export default css`
   .column-layout {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
     gap: 1rem;
