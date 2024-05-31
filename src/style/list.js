@@ -4,7 +4,7 @@ export default css`
   ul.horizontal-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0.25rem 0 0 0;
   }
 
   ul.horizontal-list > li {
@@ -19,7 +19,7 @@ export default css`
 
   ul.undecorated-list {
     padding: 0;
-    margin: 0;
+    margin: 0.25rem 0 0 0;
   }
 
   ul.undecorated-list > li {

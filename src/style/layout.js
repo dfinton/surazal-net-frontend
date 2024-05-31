@@ -3,7 +3,6 @@ import { css } from "lit";
 export default css`
   .content {
     margin: 0.5rem;
-    min-width: 300px;
   }
 
   .column-layout {
