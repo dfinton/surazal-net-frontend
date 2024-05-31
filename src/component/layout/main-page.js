@@ -21,6 +21,7 @@ class MainPage extends LitElement {
             listStyle="horizontal"
           ></link-list>
         </page-header>
+        <slot></slot>
         <page-footer>
           <page-content section="page-footer"></page-content>
           <link-list linkList="site-links" listStyle="undecorated"></link-list>
