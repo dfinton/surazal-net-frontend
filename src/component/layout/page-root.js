@@ -7,7 +7,7 @@ import "@/component/common/header";
 import "@/component/common/content";
 import "@/component/common/link-list";
 
-class MainPage extends LitElement {
+class PageRoot extends LitElement {
   static styles = [rootStyle];
 
   render() {
@@ -35,4 +35,4 @@ class MainPage extends LitElement {
   }
 }
 
-customElements.define("main-page", MainPage);
+customElements.define("page-root", PageRoot);
