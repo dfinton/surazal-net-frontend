@@ -59,7 +59,7 @@ class BlogPostList extends MobxLitElement {
     );
 
     return html`
-      <div class="content">
+      <div class="content-block">
         <ul>
           ${postList}
         </ul>

@@ -9,7 +9,7 @@ class PageFooter extends LitElement {
   render() {
     return html`
       <div class="root-section dark-container">
-        <div class="content column-layout">
+        <div class="content-block column-layout">
           <slot></slot>
         </div>
       </div>

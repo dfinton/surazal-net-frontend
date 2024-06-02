@@ -2,9 +2,9 @@ import { html, LitElement } from "lit-element";
 
 import rootStyle from "@/style/root";
 
-import "@/component/common/footer";
-import "@/component/common/header";
-import "@/component/common/content";
+import "@/component/top-level/page-footer";
+import "@/component/top-level/page-header";
+import "@/component/common/content-block";
 import "@/component/common/link-list";
 
 class PageRoot extends LitElement {
@@ -14,7 +14,7 @@ class PageRoot extends LitElement {
     return html`
       <div class="root-page">
         <page-header>
-          <page-content slot="header" section="page-header"></page-content>
+          <content-block slot="header" section="page-header"></content-block>
           <link-list
             slot="subheader"
             linkList="site-links"
@@ -23,7 +23,7 @@ class PageRoot extends LitElement {
         </page-header>
         <slot></slot>
         <page-footer>
-          <page-content section="page-footer"></page-content>
+          <content-block section="page-footer"></content-block>
           <link-list linkList="site-links" listStyle="undecorated"></link-list>
           <link-list
             linkList="social-links"

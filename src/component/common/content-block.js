@@ -14,7 +14,7 @@ const pageStoreErrorHandler = ({ section }) =>
       error.message,
     );
 
-class PageContent extends ConvertDocumentObjectToElement(MobxLitElement) {
+class ContentBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
   static properties = {
     section: {},
   };
@@ -65,8 +65,8 @@ class PageContent extends ConvertDocumentObjectToElement(MobxLitElement) {
       });
     }
 
-    return html` <div class="content">${htmlContent}</div> `;
+    return html` <div class="content-block">${htmlContent}</div> `;
   }
 }
 
-customElements.define("page-content", PageContent);
+customElements.define("content-block", ContentBlock);

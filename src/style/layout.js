@@ -1,7 +1,7 @@
 import { css } from "lit";
 
 export default css`
-  .content {
+  .content-block {
     margin: 0.5rem;
   }
 
