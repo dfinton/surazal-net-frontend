@@ -34,8 +34,8 @@ class CmsPostStore {
     });
   }
 
-  async fetchPost({ id }) {
-    if (this.post[id]) {
+  async fetchPost({ slug }) {
+    if (this.post[slug]) {
       return;
     }
 
@@ -43,42 +43,19 @@ class CmsPostStore {
       {
         post(
           where: {
-            id: "${id}"
+            slug: "${slug}"
           }
         ) {
-          id
+          slug
           title
           content {
             document
           }
           author {
-            id
             name
             email
           }
           createdAt
-          fractals {
-            id
-            name
-            altText
-            createdAt
-            thumbnail {
-              id
-              filesize
-              width
-              height
-              extension
-              url
-            }
-            medium {
-              id
-              filesize
-              width
-              height
-              extension
-              url
-            }
-          }
         }
       }
     `);
@@ -103,31 +80,16 @@ class CmsPostStore {
           }]
           take: 1
         ) {
-          id
+          slug
           title
           content {
             document
           }
           author {
-            id
             name
             email
           }
           createdAt
-          fractals {
-            id
-            name
-            altText
-            createdAt
-            thumbnail {
-              id
-              filesize
-              width
-              height
-              extension
-              url
-            }
-          }
         }
       }
     `);
@@ -139,7 +101,7 @@ class CmsPostStore {
     const [post] = data.posts;
 
     this.setPost({ post });
-    this.setLatestPostId({ id: post.id });
+    this.setLatestPostId({ slug: post.slug });
   }
 
   async fetchPostList({ page, pageSize }) {
@@ -155,10 +117,9 @@ class CmsPostStore {
           take: ${take}
           skip: ${skip}
         ) {
-          id
+          slug
           title
           author {
-            id
             name
             email
           }
@@ -196,12 +157,12 @@ class CmsPostStore {
     this.setPageCount({ pageCount });
   }
 
-  setLatestPostId({ id }) {
-    this.latestPostId = id;
+  setLatestPostId({ slug }) {
+    this.latestPostId = slug;
   }
 
   setPost({ post }) {
-    this.post[post.id] = post;
+    this.post[post.slug] = post;
   }
 
   setPostSummaryList({ postSummaryList }) {

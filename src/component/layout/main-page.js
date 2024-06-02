@@ -5,7 +5,7 @@ import rootStyle from "@/style/root";
 import "@/component/common/footer";
 import "@/component/common/header";
 import "@/component/common/content";
-import "@/component/common/linkList";
+import "@/component/common/link-list";
 
 class MainPage extends LitElement {
   static styles = [rootStyle];

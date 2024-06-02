@@ -7,6 +7,13 @@ import commonElementStyle from "@/style/common-element";
 import layoutStyle from "@/style/layout";
 import utilityStyle from "@/style/utility";
 
+const pageStoreErrorHandler = ({ section }) =>
+  (error) =>
+    console.error(
+      `An error was encountered fetching page content data for section "${section}":\n`,
+      error.message,
+    );
+
 class PageContent extends ConvertDocumentObjectToElement(MobxLitElement) {
   static properties = {
     section: {},
@@ -15,19 +22,13 @@ class PageContent extends ConvertDocumentObjectToElement(MobxLitElement) {
   static styles = [commonElementStyle, layoutStyle, utilityStyle];
 
   cmsPageStore;
-  section;
 
   connectedCallback() {
     super.connectedCallback();
 
     this.cmsPageStore
       .fetchPage({ sectionSlug: this.section })
-      .catch((error) => {
-        console.error(
-          `An error was encountered fetching page content data for section "${this.section}":\n`,
-          error.message,
-        );
-      });
+      .catch(pageStoreErrorHandler({ section: this.section }));
   }
 
   willUpdate(changedProperties) {
@@ -38,12 +39,7 @@ class PageContent extends ConvertDocumentObjectToElement(MobxLitElement) {
     if (changedProperties.has("section")) {
       this.cmsPageStore
         .fetchPage({ sectionSlug: this.section })
-        .catch((error) => {
-          console.error(
-            `An error was encountered fetching page content data for section "${this.section}":\n`,
-            error.message,
-          );
-        });
+        .catch(pageStoreErrorHandler({ section: this.section }));
     }
   }
 
