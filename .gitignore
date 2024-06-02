@@ -4,7 +4,7 @@
 /node_modules
 
 # output directory
-/dist
+/page/assets/js
 
 # misc
 .DS_Store

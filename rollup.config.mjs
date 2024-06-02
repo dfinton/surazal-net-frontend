@@ -1,36 +1,30 @@
 import babel from '@rollup/plugin-babel';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import { rollupPluginHTML as html } from '@web/rollup-plugin-html';
 import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import minifier from 'babel-plugin-template-html-minifier';
 import path from 'path';
 import dotenv from 'rollup-plugin-dotenv';
 import esbuild from 'rollup-plugin-esbuild';
+import multiInputModule from 'rollup-plugin-multi-input';
+
+const multiInput = multiInputModule.default;
 
 export default {
-  input: '**/*.html',
+  input: ['src/**/*.js'],
   output: {
-    entryFileNames: '[hash].js',
-    chunkFileNames: '[hash].js',
-    assetFileNames: '[hash][extname]',
     format: 'es',
-    dir: 'dist',
+    dir: 'page/assets/js',
   },
   preserveEntrySignatures: false,
   plugins: [
-    /** Enable using HTML as rollup entrypoint */
-    html({
-      minify: true,
-      injectServiceWorker: false,
-      rootDir: path.join(process.cwd(), 'page'),
-      flattenOutput: false,
+    multiInput({
+      relative: 'src/',
     }),
     /** Resolve bare module imports */
     nodeResolve(),
     /** Minify JS, compile JS to a lower language target */
     esbuild({
-      minify: true,
-      target: ['chrome64', 'firefox67', 'safari11.1'],
+      target: 'es2020',
     }),
     /** Bundle assets references via import.meta.url */
     importMetaAssets(),
