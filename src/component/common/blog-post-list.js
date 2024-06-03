@@ -1,4 +1,4 @@
-import { html } from "lit-element";
+import { html, css } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
 import cmsPostStore from "@/store/cms-post";
@@ -7,6 +7,27 @@ import containerStyle from "@/style/container";
 import layoutStyle from "@/style/layout";
 import rootStyle from "@/style/root";
 import utilityStyle from "@/style/utility";
+
+const blogPostListStyle = css`
+  .blog-post-list-entry {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .blog-post-list-entry > .timestamp {
+    flex: 0 1 10rem;
+  }
+
+  .blog-post-list-entry > .title {
+    flex: 1 1;
+  }
+
+  .blog-post-list-entry > .author {
+    flex: 0 1 10rem;
+    text-align: right;
+  }
+`;
 
 const postStoreErrorHandler = ({ page }) =>
   (error) =>
@@ -21,7 +42,7 @@ class BlogPostList extends MobxLitElement {
     page: {},
   };
 
-  static styles = [commonElementStyle, containerStyle, layoutStyle, rootStyle, utilityStyle];
+  static styles = [blogPostListStyle, commonElementStyle, containerStyle, layoutStyle, rootStyle, utilityStyle];
 
   cmsPostStore;
 
@@ -54,15 +75,31 @@ class BlogPostList extends MobxLitElement {
   }
 
   render() {
-    const postList = this.cmsPostStore.postSummaryList.map((postSummary) =>
-      html`
+    const postList = this.cmsPostStore.postSummaryList.map((postSummary) => {
+      const createdAtLocale = new Date(postSummary.createdAt).toLocaleDateString('en-US', {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+
+      return html`
         <div class="dark-container">
-          <div class="content-block">
-            ${postSummary.createdAt} ${postSummary.title} ${postSummary.author.name}
+          <div class="content-block blog-post-list-entry">
+            <span class="timestamp">
+              ${createdAtLocale} 
+            </span>
+            <span class="title">
+              <a href="/blog/post?slug=${postSummary.slug}">
+                ${postSummary.title}
+              </a>
+            </span>
+            <span class="author">
+              ${postSummary.author.name}
+            </span>
           </div>
         </div>
       `
-    );
+    });
 
     return html`
       <div class="root-section">
