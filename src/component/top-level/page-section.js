@@ -9,9 +9,7 @@ class PageSection extends LitElement {
   render() {
     return html`
       <div class="root-section">
-        <div class="dark-container">
-          <slot></slot>
-        </div>
+        <slot></slot>
       </div>
     `;
   }

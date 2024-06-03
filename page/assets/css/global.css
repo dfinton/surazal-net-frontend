@@ -5,6 +5,7 @@
   --body-background-color: black;
   --light-background-color: rgb(101, 85, 69);
   --dark-background-color: rgb(69, 53, 37);
+  --clear-background-color: rgba(0, 0, 0, 0);
   --border-color: rgb(45, 37, 29);
   --text-color: #e0e0e0;
   --link-color: #e0e080;

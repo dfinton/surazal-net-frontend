@@ -16,11 +16,14 @@
   <body>
     <page-root>
       <page-section>
-        <content-block section="about-this-page"></content-block>
+        <content-container containerClass="dark">
+          <content-block section="about-this-page"></content-block>
+        </content-container>
       </page-section>
     </page-root>
 
     <script type="module" src="/assets/js/component/top-level/page-section.js"></script>
+    <script type="module" src="/assets/js/component/container/content-container.js"></script>
     <script type="module" src="/assets/js/component/common/content-block.js"></script>
     <script type="module" src="/assets/js/component/layout/page-root.js"></script>
   </body>

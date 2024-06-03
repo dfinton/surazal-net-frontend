@@ -87,7 +87,7 @@ class LinkList extends MobxLitElement {
     }
 
     return html`
-      <div class="content ${justification}">
+      <div class="content-block ${justification}">
         <div>${linkLabelContent}</div>
         <div>
           <ul class="${linkListClass}">

@@ -2,18 +2,20 @@ import { html, LitElement } from "lit-element";
 
 import rootStyle from "@/style/root";
 
+import "@/component/container/content-container";
+
 class PageHeader extends LitElement {
   static styles = [rootStyle];
 
   render() {
     return html`
       <div class="root-section">
-        <div class="light-container">
+        <content-container containerClass="light">
           <slot name="header"></slot>
-        </div>
-        <div class="dark-container">
+        </content-container>
+        <content-container containerClass="dark">
           <slot name="subheader"></slot>
-        </div>
+        </content-container>
       </div>
     `;
   }

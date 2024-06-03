@@ -2,7 +2,7 @@ import { css } from "lit";
 
 export default css`
   .content-block {
-    margin: 0.5rem;
+    padding: 0.5rem;
   }
 
   .column-layout {
