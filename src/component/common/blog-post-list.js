@@ -3,7 +3,9 @@ import { MobxLitElement } from "@adobe/lit-mobx";
 
 import cmsPostStore from "@/store/cms-post";
 import commonElementStyle from "@/style/common-element";
+import containerStyle from "@/style/container";
 import layoutStyle from "@/style/layout";
+import rootStyle from "@/style/root";
 import utilityStyle from "@/style/utility";
 
 const postStoreErrorHandler = ({ page }) =>
@@ -19,7 +21,7 @@ class BlogPostList extends MobxLitElement {
     page: {},
   };
 
-  static styles = [commonElementStyle, layoutStyle, utilityStyle];
+  static styles = [commonElementStyle, containerStyle, layoutStyle, rootStyle, utilityStyle];
 
   cmsPostStore;
 
@@ -54,15 +56,17 @@ class BlogPostList extends MobxLitElement {
   render() {
     const postList = this.cmsPostStore.postSummaryList.map((postSummary) =>
       html`
-        <li>${postSummary.title}</li>
+        <div class="dark-container">
+          <div class="content-block">
+            ${postSummary.createdAt} ${postSummary.title} ${postSummary.author.name}
+          </div>
+        </div>
       `
     );
 
     return html`
-      <div class="content-block">
-        <ul>
-          ${postList}
-        </ul>
+      <div class="root-section">
+        ${postList}
       </div>
     `;
   }
