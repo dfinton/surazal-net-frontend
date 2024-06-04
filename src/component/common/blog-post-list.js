@@ -29,7 +29,8 @@ const blogPostListStyle = css`
   }
 `;
 
-const postStoreErrorHandler = ({ page }) =>
+const postStoreErrorHandler =
+  ({ page }) =>
   (error) =>
     console.error(
       `An error was encountered fetching post list data for page "${page}":\n`,
@@ -42,7 +43,14 @@ class BlogPostList extends MobxLitElement {
     page: {},
   };
 
-  static styles = [blogPostListStyle, commonElementStyle, containerStyle, layoutStyle, rootStyle, utilityStyle];
+  static styles = [
+    blogPostListStyle,
+    commonElementStyle,
+    containerStyle,
+    layoutStyle,
+    rootStyle,
+    utilityStyle,
+  ];
 
   cmsPostStore;
 
@@ -76,7 +84,9 @@ class BlogPostList extends MobxLitElement {
 
   render() {
     const postList = this.cmsPostStore.postSummaryList.map((postSummary) => {
-      const createdAtLocale = new Date(postSummary.createdAt).toLocaleDateString('en-US', {
+      const createdAtLocale = new Date(
+        postSummary.createdAt,
+      ).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -85,27 +95,19 @@ class BlogPostList extends MobxLitElement {
       return html`
         <div class="dark-container">
           <div class="content-block blog-post-list-entry">
-            <span class="timestamp">
-              ${createdAtLocale} 
-            </span>
+            <span class="timestamp"> ${createdAtLocale} </span>
             <span class="title">
               <a href="/blog/post?slug=${postSummary.slug}">
                 ${postSummary.title}
               </a>
             </span>
-            <span class="author">
-              ${postSummary.author.name}
-            </span>
+            <span class="author"> ${postSummary.author.name} </span>
           </div>
         </div>
-      `
+      `;
     });
 
-    return html`
-      <div class="root-section">
-        ${postList}
-      </div>
-    `;
+    return html` <div class="root-section">${postList}</div> `;
   }
 }
 

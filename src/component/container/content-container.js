@@ -7,7 +7,7 @@ class ContentContainer extends LitElement {
     containerClass: {},
   };
 
-  static styles = [ containerStyle ];
+  static styles = [containerStyle];
 
   constructor() {
     super();

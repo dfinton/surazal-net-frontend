@@ -7,7 +7,8 @@ import commonElementStyle from "@/style/common-element";
 import layoutStyle from "@/style/layout";
 import utilityStyle from "@/style/utility";
 
-const pageStoreErrorHandler = ({ section }) =>
+const pageStoreErrorHandler =
+  ({ section }) =>
   (error) =>
     console.error(
       `An error was encountered fetching page content data for section "${section}":\n`,
