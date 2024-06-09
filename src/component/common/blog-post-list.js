@@ -2,6 +2,7 @@ import { html, css } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
 import cmsPostStore from "@/store/cms-post";
+import urlSearchParamsStore from "@/store/url-search-params";
 import commonElementStyle from "@/style/common-element";
 import containerStyle from "@/style/container";
 import layoutStyle from "@/style/layout";
@@ -53,9 +54,21 @@ class BlogPostList extends MobxLitElement {
   ];
 
   cmsPostStore;
+  urlSearchParamsStore;
+
+  constructor() {
+    super();
+
+    this.cmsPostStore = cmsPostStore;
+    this.urlSearchParamsStore = urlSearchParamsStore;
+    this.pageSize = 10;
+    this.page = 1;
+  }
 
   connectedCallback() {
     super.connectedCallback();
+
+    this.urlSearchParamsStore.fetchUrlSearchParams();
 
     this.cmsPostStore
       .fetchPostList({ page: this.page, pageSize: this.pageSize })
@@ -72,14 +85,6 @@ class BlogPostList extends MobxLitElement {
         .fetchPostList({ page: this.page, pageSize: this.pageSize })
         .catch(postStoreErrorHandler({ page: this.page }));
     }
-  }
-
-  constructor() {
-    super();
-
-    this.cmsPostStore = cmsPostStore;
-    this.pageSize = 10;
-    this.page = 1;
   }
 
   render() {

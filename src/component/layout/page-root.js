@@ -25,10 +25,7 @@ class PageRoot extends LitElement {
         <page-footer>
           <content-block section="page-footer"></content-block>
           <link-list linkList="site-links" listStyle="undecorated"></link-list>
-          <link-list
-            linkList="social-web"
-            listStyle="undecorated"
-          ></link-list>
+          <link-list linkList="social-web" listStyle="undecorated"></link-list>
         </page-footer>
       </div>
     `;
