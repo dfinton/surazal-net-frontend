@@ -1,4 +1,4 @@
-let urlSearchParams
+let urlSearchParams;
 
 const getParam = (param) => {
   if (!urlSearchParams) {

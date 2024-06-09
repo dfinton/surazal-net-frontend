@@ -29,13 +29,14 @@ const blogPostListStyle = css`
   }
 `;
 
-const postStoreErrorHandler =
-  ({ page }) =>
-  (error) =>
+const postStoreErrorHandler = ({ page }) => {
+  return (error) => {
     console.error(
       `An error was encountered fetching post list data for page "${page}":\n`,
       error.message,
     );
+  };
+};
 
 class BlogPostList extends MobxLitElement {
   static properties = {

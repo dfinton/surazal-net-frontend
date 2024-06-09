@@ -4,9 +4,7 @@ import "@/component/root/page.js";
 
 class FractalsPage extends LitElement {
   render() {
-    return html`
-      <page-root></page-root>
-    `;
+    return html` <page-root></page-root> `;
   }
 }
 

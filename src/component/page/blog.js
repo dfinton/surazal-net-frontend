@@ -19,7 +19,10 @@ class BlogPage extends LitElement {
   render() {
     return html`
       <page-root>
-        <blog-post-list page="${this.page}" pageSize="${this.pageSize}"></blog-post-list>
+        <blog-post-list
+          page="${this.page}"
+          pageSize="${this.pageSize}"
+        ></blog-post-list>
       </page-root>
     `;
   }
