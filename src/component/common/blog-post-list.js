@@ -8,6 +8,8 @@ import layoutStyle from "@/style/layout";
 import rootStyle from "@/style/root";
 import utilityStyle from "@/style/utility";
 
+import "@/component/common/pagination-controls";
+
 const blogPostListStyle = css`
   .blog-post-list-entry {
     display: flex;
@@ -29,10 +31,10 @@ const blogPostListStyle = css`
   }
 `;
 
-const postStoreErrorHandler = ({ page }) => {
+const postStoreErrorHandler = () => {
   return (error) => {
     console.error(
-      `An error was encountered fetching post list data for page "${page}":\n`,
+      `An error was encountered fetching post list data:`,
       error.message,
     );
   };
@@ -66,7 +68,11 @@ class BlogPostList extends MobxLitElement {
 
     this.cmsPostStore
       .fetchPostList({ page: this.page, pageSize: this.pageSize })
-      .catch(postStoreErrorHandler({ page: this.page }));
+      .catch(postStoreErrorHandler());
+
+    this.cmsPostStore
+      .fetchPostCount()
+      .catch(postStoreErrorHandler());
   }
 
   willUpdate(changedProperties) {
@@ -106,7 +112,25 @@ class BlogPostList extends MobxLitElement {
       `;
     });
 
-    return html` <div class="root-section">${postList}</div> `;
+    return html`
+      <div class="root-section">
+        <div class="dark-container">
+          <pagination-controls
+            page="${this.page}"
+            pageSize="${this.pageSize}"
+            total="${this.cmsPostStore.postCount}"
+          ></pagination-controls>
+        </div>
+        ${postList}
+        <div class="dark-container">
+          <pagination-controls
+            page="${this.page}"
+            pageSize="${this.pageSize}"
+            total="${this.cmsPostStore.postCount}"
+          ></pagination-controls>
+        </div>
+      </div>
+    `;
   }
 }
 

@@ -146,7 +146,7 @@ class CmsPostStore {
       }
     `);
 
-    const postCount = data.postsCount ?? 0;
+    const postCount = data?.data?.postsCount ?? 0;
 
     this.setPostCount({ postCount });
   }

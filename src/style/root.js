@@ -17,7 +17,7 @@ export default css`
     align-items: stretch;
     gap: 0.125rem;
     border-radius: 0.25rem;
-    border: 0.25rem outset var(--border-color);
+    border: 0.25rem outset var(--dark-border-color);
     overflow: hidden;
   }
 `;
