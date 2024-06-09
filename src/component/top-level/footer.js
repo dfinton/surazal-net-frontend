@@ -3,7 +3,7 @@ import { html, LitElement } from "lit-element";
 import layoutStyle from "@/style/layout";
 import rootStyle from "@/style/root";
 
-import "@/component/container/content-container";
+import "@/component/container/content";
 
 class PageFooter extends LitElement {
   static styles = [rootStyle, layoutStyle];

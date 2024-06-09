@@ -2,7 +2,7 @@ import { html, LitElement } from "lit-element";
 
 import rootStyle from "@/style/root";
 
-import "@/component/container/content-container";
+import "@/component/container/content";
 
 class PageHeader extends LitElement {
   static styles = [rootStyle];

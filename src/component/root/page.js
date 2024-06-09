@@ -2,8 +2,8 @@ import { html, LitElement } from "lit-element";
 
 import rootStyle from "@/style/root";
 
-import "@/component/top-level/page-footer";
-import "@/component/top-level/page-header";
+import "@/component/top-level/footer";
+import "@/component/top-level/header";
 import "@/component/common/content-block";
 import "@/component/common/link-list";
 
