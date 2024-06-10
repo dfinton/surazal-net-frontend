@@ -7,8 +7,8 @@ import utilityStyle from "@/style/utility";
 const paginationStyle = css`
   .button {
     text-align: center;
-    padding: .25rem .25rem .125rem;
-    border-radius: .25rem;
+    padding: 0.25rem 0.25rem 0.125rem;
+    border-radius: 0.25rem;
     display: inline-block;
     text-align: center;
     margin: 0 0.125rem 0 0.125rem;
@@ -41,47 +41,85 @@ class PaginationControls extends LitElement {
     paginationStyle,
   ];
 
+  _pageClickEvent(pageNumber) {
+    return (e) => {
+      const isActive = e.target.classList.contains("active");
+
+      if (!isActive) {
+        return;
+      }
+
+      this.dispatchEvent(
+        new Event("page-click", {
+          bubbles: true,
+          composed: true,
+          detail: { page: pageNumber },
+        }),
+      );
+    };
+  }
+
   render() {
-    const totalPages = Math.ceil(this.total / this.pageSize);
-    const isFirstPage = this.page == 1;
-    const isLastPage = this.page == totalPages;
-    const previousButtonsClass = `button ${isFirstPage ? 'inactive' : 'active'}`;
-    const nextButtonsClass = `button ${isLastPage ? 'inactive' : 'active'}`
+    const totalPages = Math.ceil(this.total / Number(this.pageSize));
+    const page = Number(this.page);
+    const isFirstPage = page === 1;
+    const isLastPage = page === totalPages;
+    const previousButtonsClass = `button ${isFirstPage ? "inactive" : "active"}`;
+    const nextButtonsClass = `button ${isLastPage ? "inactive" : "active"}`;
+
+    const firstPageClickEvent = this._pageClickEvent(1);
+    const previousPageClickEvent = this._pageClickEvent(Math.max(page - 1, 1));
+    const nextPageClickEvent = this._pageClickEvent(
+      Math.min(page + 1, totalPages),
+    );
+    const lastPageClickEvent = this._pageClickEvent(totalPages);
 
     let firstPageButton = html`
-      <span class="${previousButtonsClass}">&lt;&lt;</span>
+      <span
+        role="button"
+        @click="${firstPageClickEvent}"
+        class="${previousButtonsClass}"
+        >&lt;&lt;</span
+      >
     `;
 
     let previousPageButton = html`
-      <span class="${previousButtonsClass}">&lt;</span>
+      <span
+        role="button"
+        @click="${previousPageClickEvent}"
+        class="${previousButtonsClass}"
+        >&lt;</span
+      >
     `;
 
     if (!isFirstPage) {
-      firstPageButton = html`
-        <a>${firstPageButton}</a>
-      `;
+      firstPageButton = html` <a>${firstPageButton}</a> `;
 
-      previousPageButton = html`
-        <a>${previousPageButton}</a>
-      `
+      previousPageButton = html` <a>${previousPageButton}</a> `;
     }
 
     let nextPageButton = html`
-      <span class="${nextButtonsClass}">&gt;</span>
+      <span
+        role="button"
+        @click="${nextPageClickEvent}"
+        class="${nextButtonsClass}"
+        >&gt;</span
+      >
     `;
 
     let lastPageButton = html`
-      <span class="${nextButtonsClass}">&gt;&gt;</span>
+      <span
+        role="button"
+        @click="${lastPageClickEvent}"
+        class="${nextButtonsClass}"
+        >&gt;&gt;</span
+      >
     `;
 
     if (!isLastPage) {
-      nextPageButton = html`
-        <a>${nextPageButton}</a>
-      `;
+      nextPageButton = html` <a>${nextPageButton}</a> `;
 
-      lastPageButton = html`
-        <a>${lastPageButton}</a>
-      `
+      lastPageButton = html` <a>${lastPageButton}</a> `;
     }
 
     const pageButtons = [];
@@ -90,17 +128,21 @@ class PaginationControls extends LitElement {
     pageButtons.push(previousPageButton);
 
     for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
-      const isCurrentPage = this.page == currentPage;
-      const pageButtonClass = `button ${isCurrentPage ? 'inactive' : 'active'}`;
+      const isCurrentPage = page === currentPage;
+      const pageButtonClass = `button ${isCurrentPage ? "inactive" : "active"}`;
+      const pageClickEvent = this._pageClickEvent(currentPage);
 
       let pageButton = html`
-        <span class="${pageButtonClass}">${currentPage}</span>
+        <span
+          role="button"
+          @click="${pageClickEvent}"
+          class="${pageButtonClass}"
+          >${currentPage}</span
+        >
       `;
 
       if (!isCurrentPage) {
-        pageButton = html`
-          <a>${pageButton}</a>
-        `;
+        pageButton = html` <a>${pageButton}</a> `;
       }
 
       pageButtons.push(pageButton);
@@ -109,11 +151,7 @@ class PaginationControls extends LitElement {
     pageButtons.push(nextPageButton);
     pageButtons.push(lastPageButton);
 
-    return html`
-      <div class="content-block center">
-        ${pageButtons}
-      </div>
-    `;
+    return html` <div class="content-block center">${pageButtons}</div> `;
   }
 }
 

@@ -70,9 +70,7 @@ class BlogPostList extends MobxLitElement {
       .fetchPostList({ page: this.page, pageSize: this.pageSize })
       .catch(postStoreErrorHandler());
 
-    this.cmsPostStore
-      .fetchPostCount()
-      .catch(postStoreErrorHandler());
+    this.cmsPostStore.fetchPostCount().catch(postStoreErrorHandler());
   }
 
   willUpdate(changedProperties) {

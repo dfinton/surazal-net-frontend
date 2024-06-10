@@ -13,7 +13,7 @@ class BlogPage extends LitElement {
     super();
 
     this.page = getParam("page") ?? 1;
-    this.pageSize = 2;
+    this.pageSize = 1;
   }
 
   render() {
