@@ -85,6 +85,15 @@ class BlogPostList extends MobxLitElement {
     }
   }
 
+  _handlePageClickEvent(e) {
+    const url = new URL(location);
+    const page = e.detail.page;
+
+    url.searchParams.set("page", page);
+    history.pushState({}, "", url);
+    this.page = page;
+  }
+
   render() {
     const postList = this.cmsPostStore.postSummaryList.map((postSummary) => {
       const createdAtLocale = new Date(
@@ -117,6 +126,7 @@ class BlogPostList extends MobxLitElement {
             page="${this.page}"
             pageSize="${this.pageSize}"
             total="${this.cmsPostStore.postCount}"
+            @page-click="${this._handlePageClickEvent}"
           ></pagination-controls>
         </div>
         ${postList}
@@ -125,6 +135,7 @@ class BlogPostList extends MobxLitElement {
             page="${this.page}"
             pageSize="${this.pageSize}"
             total="${this.cmsPostStore.postCount}"
+            @page-click="${this._handlePageClickEvent}"
           ></pagination-controls>
         </div>
       </div>

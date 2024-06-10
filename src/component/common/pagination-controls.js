@@ -41,7 +41,7 @@ class PaginationControls extends LitElement {
     paginationStyle,
   ];
 
-  _pageClickEvent(pageNumber) {
+  _dispatchPageClickEvent(pageNumber) {
     return (e) => {
       const isActive = e.target.classList.contains("active");
 
@@ -50,7 +50,7 @@ class PaginationControls extends LitElement {
       }
 
       this.dispatchEvent(
-        new Event("page-click", {
+        new CustomEvent("page-click", {
           bubbles: true,
           composed: true,
           detail: { page: pageNumber },
@@ -67,12 +67,12 @@ class PaginationControls extends LitElement {
     const previousButtonsClass = `button ${isFirstPage ? "inactive" : "active"}`;
     const nextButtonsClass = `button ${isLastPage ? "inactive" : "active"}`;
 
-    const firstPageClickEvent = this._pageClickEvent(1);
-    const previousPageClickEvent = this._pageClickEvent(Math.max(page - 1, 1));
-    const nextPageClickEvent = this._pageClickEvent(
+    const firstPageClickEvent = this._dispatchPageClickEvent(1);
+    const previousPageClickEvent = this._dispatchPageClickEvent(Math.max(page - 1, 1));
+    const nextPageClickEvent = this._dispatchPageClickEvent(
       Math.min(page + 1, totalPages),
     );
-    const lastPageClickEvent = this._pageClickEvent(totalPages);
+    const lastPageClickEvent = this._dispatchPageClickEvent(totalPages);
 
     let firstPageButton = html`
       <span
@@ -130,7 +130,7 @@ class PaginationControls extends LitElement {
     for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
       const isCurrentPage = page === currentPage;
       const pageButtonClass = `button ${isCurrentPage ? "inactive" : "active"}`;
-      const pageClickEvent = this._pageClickEvent(currentPage);
+      const pageClickEvent = this._dispatchPageClickEvent(currentPage);
 
       let pageButton = html`
         <span
