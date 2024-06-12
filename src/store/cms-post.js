@@ -34,8 +34,8 @@ class CmsPostStore {
     });
   }
 
-  async fetchPost({ slug }) {
-    if (this.post[slug]) {
+  async fetchPost({ post }) {
+    if (this.post[post]) {
       return;
     }
 
@@ -43,7 +43,7 @@ class CmsPostStore {
       {
         post(
           where: {
-            slug: "${slug}"
+            slug: "${post}"
           }
         ) {
           slug
@@ -60,11 +60,13 @@ class CmsPostStore {
       }
     `);
 
-    if (!data.post) {
+    const postData = data?.data?.post;
+
+    if (!postData) {
       return;
     }
 
-    this.setPost({ post: data.post });
+    this.setPost({ post: postData });
   }
 
   async fetchLatestPost() {
@@ -94,14 +96,14 @@ class CmsPostStore {
       }
     `);
 
-    if (!data.posts) {
+    const postData = data?.data?.post;
+
+    if (!postData) {
       return;
     }
 
-    const [post] = data.posts;
-
-    this.setPost({ post });
-    this.setLatestPostId({ slug: post.slug });
+    this.setPost({ post: postData });
+    this.setLatestPostId({ post: postData.slug });
   }
 
   async fetchPostList({ page, pageSize }) {
@@ -157,8 +159,8 @@ class CmsPostStore {
     this.setPageCount({ pageCount });
   }
 
-  setLatestPostId({ slug }) {
-    this.latestPostId = slug;
+  setLatestPostId({ post }) {
+    this.latestPostId = post;
   }
 
   setPost({ post }) {

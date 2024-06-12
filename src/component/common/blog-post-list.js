@@ -109,7 +109,7 @@ class BlogPostList extends MobxLitElement {
           <div class="content-block blog-post-list-entry">
             <span class="timestamp"> ${createdAtLocale} </span>
             <span class="title">
-              <a href="/blog/post?slug=${postSummary.slug}">
+              <a href="/blog/post?post=${postSummary.slug}">
                 ${postSummary.title}
               </a>
             </span>
