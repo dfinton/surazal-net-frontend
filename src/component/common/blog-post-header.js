@@ -55,13 +55,30 @@ class BlogPostHeader extends ConvertDocumentObjectToElement(MobxLitElement) {
     const title = post?.title;
     const authorName = post?.author?.name;
     const authorEmail = post?.author?.email;
+    const createdAt = post?.createdAt;
+
+    const createdAtLocale = new Date(
+      createdAt,
+    ).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    let authorContent = html`<h4>Anonymously authored at ${createdAtLocale}</h4>`;
+
+    if (authorName) {
+      const authorEmailLink = authorEmail ?
+        html`<a href="mailto:${authorEmail}">${authorName}</a>` :
+        html`${authorName}`;
+
+      authorContent = html`<h4>by ${authorEmailLink} at ${createdAtLocale}</h4>`
+    }
 
     return html`
       <div class="content-block">
         <h2>${title}</h2>
-        <h4>
-          by <a href="mailto:${authorEmail}">${authorName}</a>
-        </h4>
+        ${authorContent}
       </div>
     `;
   }
