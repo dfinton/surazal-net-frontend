@@ -56,6 +56,20 @@ class CmsPostStore {
             email
           }
           createdAt
+          fractals {
+            slug
+            altText
+            thumbnail {
+              slug
+              name
+              file {
+                filesize
+                width
+                height
+                url
+              }
+            }
+          }
         }
       }
     `);
@@ -92,6 +106,20 @@ class CmsPostStore {
             email
           }
           createdAt
+          fractals {
+            slug
+            altText
+            thumbnail {
+              slug
+              name
+              file {
+                filesize
+                width
+                height
+                url
+              }
+            }
+          }
         }
       }
     `);
