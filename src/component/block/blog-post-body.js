@@ -2,34 +2,34 @@ import { html } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
 import ConvertDocumentObjectToElement from "@/mixin/convert-cms-document-object";
-import cmsPageStore from "@/store/cms-page";
+import cmsPostStore from "@/store/cms-post";
 import commonElementStyle from "@/style/common-element";
 import layoutStyle from "@/style/layout";
 import utilityStyle from "@/style/utility";
 
-const pageStoreErrorHandler =
-  ({ section }) =>
+const blogPostStoreErrorHandler =
+  ({ post }) =>
   (error) =>
     console.error(
-      `An error was encountered fetching page content data for section "${section}":\n`,
+      `An error was encountered fetching blog post data for slug "${post}":`,
       error.message,
     );
 
-class ContentBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
+class BlogPostBodyBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
   static properties = {
-    section: {},
+    post: {},
   };
 
   static styles = [commonElementStyle, layoutStyle, utilityStyle];
 
-  cmsPageStore;
+  cmsPostStore;
 
   connectedCallback() {
     super.connectedCallback();
 
-    this.cmsPageStore
-      .fetchPage({ sectionSlug: this.section })
-      .catch(pageStoreErrorHandler({ section: this.section }));
+    this.cmsPostStore
+      .fetchPost({ post: this.post })
+      .catch(blogPostStoreErrorHandler({ post: this.post }));
   }
 
   willUpdate(changedProperties) {
@@ -37,22 +37,22 @@ class ContentBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
       return;
     }
 
-    if (changedProperties.has("section")) {
-      this.cmsPageStore
-        .fetchPage({ sectionSlug: this.section })
-        .catch(pageStoreErrorHandler({ section: this.section }));
+    if (changedProperties.has("post")) {
+      this.cmsPostStore
+        .fetchPost({ post: this.post })
+        .catch(blogPostStoreErrorHandler({ post: this.post }));
     }
   }
 
   constructor() {
     super();
 
-    this.cmsPageStore = cmsPageStore;
+    this.cmsPostStore = cmsPostStore;
   }
 
   render() {
-    const page = this.cmsPageStore.page[this.section];
-    const content = page?.content?.document;
+    const post = this.cmsPostStore.post[this.post];
+    const content = post?.content?.document;
 
     let htmlContent;
 
@@ -66,8 +66,12 @@ class ContentBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
       });
     }
 
-    return html`<div class="content-block">${htmlContent}</div>`;
+    return html`
+      <div class="content-block">
+        ${htmlContent}
+      </div>
+    `;
   }
 }
 
-customElements.define("content-block", ContentBlock);
+customElements.define("blog-post-body-block", BlogPostBodyBlock);

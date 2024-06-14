@@ -7,7 +7,7 @@ import layoutStyle from "@/style/layout";
 import listStyle from "@/style/list";
 import utilityStyle from "@/style/utility";
 
-class LinkList extends MobxLitElement {
+class LinkListBlock extends MobxLitElement {
   static properties = {
     linkList: {},
     listStyle: {},
@@ -99,4 +99,4 @@ class LinkList extends MobxLitElement {
   }
 }
 
-customElements.define("link-list", LinkList);
+customElements.define("link-list-block", LinkListBlock);

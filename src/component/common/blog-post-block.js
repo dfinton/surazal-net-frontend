@@ -4,6 +4,7 @@ import { MobxLitElement } from "@adobe/lit-mobx";
 import ConvertDocumentObjectToElement from "@/mixin/convert-cms-document-object";
 import cmsPostStore from "@/store/cms-post";
 import commonElementStyle from "@/style/common-element";
+import containerStyle from "@/style/container";
 import layoutStyle from "@/style/layout";
 import utilityStyle from "@/style/utility";
 
@@ -20,7 +21,7 @@ class BlogPostBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
     post: {},
   };
 
-  static styles = [commonElementStyle, layoutStyle, utilityStyle];
+  static styles = [commonElementStyle, containerStyle, layoutStyle, utilityStyle];
 
   cmsPostStore;
 
@@ -67,8 +68,10 @@ class BlogPostBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
     }
 
     return html`
-      <div class="content-block">
-        ${htmlContent}
+      <div class="dark-container">
+        <div class="content-block">
+          ${htmlContent}
+        </div>
       </div>
     `;
   }

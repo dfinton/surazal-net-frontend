@@ -1,10 +1,26 @@
 import { html, LitElement } from "lit-element";
 
-import "@/component/root/page.js";
+import containerStyle from "@/style/container";
+import rootStyle from "@/style/root";
+
+import "@/component/section/header";
+import "@/component/section/footer";
 
 class DisclaimerPage extends LitElement {
+  static styles = [containerStyle, rootStyle];
+
   render() {
-    return html` <page-root></page-root> `;
+    return html`
+      <div class="root-page">
+        <header-section></header-section>
+        <div class="root-section">
+          <div class="dark-container">
+            Placeholder
+          </div>
+        </div>
+        <footer-section></footer-section>
+      </div>
+    `;
   }
 }
 

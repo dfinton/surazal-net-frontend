@@ -1,20 +1,26 @@
 import { html, LitElement } from "lit-element";
 
-import "@/component/top-level/section.js";
-import "@/component/container/content.js";
-import "@/component/common/content-block.js";
-import "@/component/root/page.js";
+import containerStyle from "@/style/container";
+import rootStyle from "@/style/root";
+
+import "@/component/block/content";
+import "@/component/section/header";
+import "@/component/section/footer";
 
 class BasePage extends LitElement {
+  static styles = [containerStyle, rootStyle];
+
   render() {
     return html`
-      <page-root>
-        <page-section>
-          <content-container containerClass="dark">
+      <div class="root-page">
+        <header-section></header-section>
+        <div class="root-section">
+          <div class="dark-container">
             <content-block section="home-page-intro"></content-block>
-          </content-container>
-        </page-section>
-      </page-root>
+          </div>
+        </div>
+        <footer-section></footer-section>
+      </div>
     `;
   }
 }

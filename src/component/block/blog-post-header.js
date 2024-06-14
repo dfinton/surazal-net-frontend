@@ -4,7 +4,6 @@ import { MobxLitElement } from "@adobe/lit-mobx";
 import ConvertDocumentObjectToElement from "@/mixin/convert-cms-document-object";
 import cmsPostStore from "@/store/cms-post";
 import commonElementStyle from "@/style/common-element";
-import containerStyle from "@/style/container";
 import layoutStyle from "@/style/layout";
 import utilityStyle from "@/style/utility";
 
@@ -16,12 +15,12 @@ const blogPostStoreErrorHandler =
       error.message,
     );
 
-class BlogPostHeader extends ConvertDocumentObjectToElement(MobxLitElement) {
+class BlogPostHeaderBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
   static properties = {
     post: {},
   };
 
-  static styles = [commonElementStyle, containerStyle, layoutStyle, utilityStyle];
+  static styles = [commonElementStyle, layoutStyle, utilityStyle];
 
   cmsPostStore;
 
@@ -77,14 +76,12 @@ class BlogPostHeader extends ConvertDocumentObjectToElement(MobxLitElement) {
     }
 
     return html`
-      <div class="dark-container">
-        <div class="content-block">
-          <h2>${title}</h2>
-          ${authorContent}
-        </div>
+      <div class="content-block">
+        <h2>${title}</h2>
+        ${authorContent}
       </div>
     `;
   }
 }
 
-customElements.define("blog-post-header", BlogPostHeader);
+customElements.define("blog-post-header-block", BlogPostHeaderBlock);

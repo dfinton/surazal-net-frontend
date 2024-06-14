@@ -1,14 +1,17 @@
 import { html, LitElement } from "lit-element";
 
 import getParam from "@/service/url-search-params";
+import containerStyle from "@/style/container";
+import rootStyle from "@/style/root";
 
-import "@/component/top-level/section.js";
-import "@/component/container/content.js";
-import "@/component/common/blog-post-block.js";
-import "@/component/common/blog-post-header.js";
-import "@/component/root/page.js";
+import "@/component/block/blog-post-body.js";
+import "@/component/block/blog-post-header.js";
+import "@/component/section/header";
+import "@/component/section/footer";
 
 class BlogPostPage extends LitElement {
+  static styles = [containerStyle, rootStyle];
+
   slug;
 
   constructor() {
@@ -19,16 +22,18 @@ class BlogPostPage extends LitElement {
 
   render() {
     return html`
-      <page-root>
-        <page-section>
-          <content-container containerClass="dark">
-            <blog-post-header post="${this.slug}"></blog-post-header>
-          </content-container>
-          <content-container containerClass="dark">
-            <blog-post-block post="${this.slug}"></blog-post-block>
-          </content-container>
-        </page-section>
-      </page-root>
+      <div class="root-page">
+        <header-section></header-section>
+        <div class="root-section">
+          <div class="dark-container">
+            <blog-post-header-block post="${this.slug}"></blog-post-header-block>
+          </div>
+          <div class="dark-container">
+            <blog-post-body-block post="${this.slug}"></blog-post-body-block>
+          </div>
+        </div>
+        <footer-section></footer-section>
+      </div>
     `;
   }
 }

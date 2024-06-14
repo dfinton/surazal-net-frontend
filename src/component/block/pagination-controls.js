@@ -27,7 +27,7 @@ const paginationStyle = css`
   }
 `;
 
-class PaginationControls extends LitElement {
+class PaginationControlsBlock extends LitElement {
   static properties = {
     pageSize: {},
     page: {},
@@ -151,8 +151,8 @@ class PaginationControls extends LitElement {
     pageButtons.push(nextPageButton);
     pageButtons.push(lastPageButton);
 
-    return html` <div class="content-block center">${pageButtons}</div> `;
+    return html`<div class="content-block center">${pageButtons}</div>`;
   }
 }
 
-customElements.define("pagination-controls", PaginationControls);
+customElements.define("pagination-controls-block", PaginationControlsBlock);
