@@ -1,13 +1,13 @@
 import { html, LitElement } from "lit-element";
 
 import containerStyle from "@/style/container";
-import rootStyle from "@/style/root";
+import pageStyle from "@/style/page";
 
 import "@/component/section/header";
 import "@/component/section/footer";
 
 class LinksPage extends LitElement {
-  static styles = [containerStyle, rootStyle];
+  static styles = [containerStyle, pageStyle];
 
   render() {
     return html`
@@ -15,7 +15,7 @@ class LinksPage extends LitElement {
         <header-section></header-section>
         <div class="root-section">
           <div class="dark-container">
-            Placeholder
+            Links Placeholder
           </div>
         </div>
         <footer-section></footer-section>

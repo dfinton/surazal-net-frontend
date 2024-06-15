@@ -4,7 +4,7 @@ import { MobxLitElement } from "@adobe/lit-mobx";
 import getParam from "@/service/url-search-params";
 import cmsPostStore from "@/store/cms-post";
 import containerStyle from "@/style/container";
-import rootStyle from "@/style/root";
+import pageStyle from "@/style/page";
 
 import "@/component/block/blog-post-summary.js";
 import "@/component/block/pagination-controls.js";
@@ -21,7 +21,7 @@ const postStoreErrorHandler = () => {
 };
 
 class BlogPage extends MobxLitElement {
-  static styles = [containerStyle, rootStyle];
+  static styles = [containerStyle, pageStyle];
 
   cmsPostStore;
   page;

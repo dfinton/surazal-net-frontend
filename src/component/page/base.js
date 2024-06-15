@@ -1,14 +1,14 @@
 import { html, LitElement } from "lit-element";
 
 import containerStyle from "@/style/container";
-import rootStyle from "@/style/root";
+import pageStyle from "@/style/page";
 
 import "@/component/block/content";
 import "@/component/section/header";
 import "@/component/section/footer";
 
 class BasePage extends LitElement {
-  static styles = [containerStyle, rootStyle];
+  static styles = [containerStyle, pageStyle];
 
   render() {
     return html`

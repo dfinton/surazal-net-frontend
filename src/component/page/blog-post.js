@@ -2,7 +2,7 @@ import { html, LitElement } from "lit-element";
 
 import getParam from "@/service/url-search-params";
 import containerStyle from "@/style/container";
-import rootStyle from "@/style/root";
+import pageStyle from "@/style/page";
 
 import "@/component/block/blog-post-body.js";
 import "@/component/block/blog-post-header.js";
@@ -10,7 +10,7 @@ import "@/component/section/header";
 import "@/component/section/footer";
 
 class BlogPostPage extends LitElement {
-  static styles = [containerStyle, rootStyle];
+  static styles = [containerStyle, pageStyle];
 
   slug;
 
