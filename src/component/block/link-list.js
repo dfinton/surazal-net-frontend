@@ -18,7 +18,7 @@ class LinkListBlock extends MobxLitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    this.cmsLinkStore.fetchLink({ slug: this.linkList }).catch((error) => {
+    this.cmsLinkStore.fetchLink({ link: this.linkList }).catch((error) => {
       console.error(
         `An error was encountered fetching link list data for "${this.linkList}":\n`,
         error.message,
@@ -32,7 +32,7 @@ class LinkListBlock extends MobxLitElement {
     }
 
     if (changedProperties.has("linkList")) {
-      this.cmsLinkStore.fetchLink({ slug: this.linkList }).catch((error) => {
+      this.cmsLinkStore.fetchLink({ link: this.linkList }).catch((error) => {
         console.error(
           `An error was encountered fetching link list data for "${this.linkList}":\n`,
           error.message,

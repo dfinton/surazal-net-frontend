@@ -1,4 +1,6 @@
 import { makeObservable, observable, action } from "mobx";
+
+import { LinkFetchError } from "@/error";
 import cms from "@/service/cms";
 
 class CmsLinkStore {
@@ -10,16 +12,15 @@ class CmsLinkStore {
       link: observable,
       pendingRequests: observable,
       fetchLink: action,
-      setLink: action,
     });
   }
 
-  async fetchLink({ slug }) {
-    if (this.link[slug] || this.pendingRequests.has(slug)) {
+  async fetchLink({ link }) {
+    if (this.link[link] || this.pendingRequests.has(link)) {
       return;
     }
 
-    this.pendingRequests.add(slug);
+    this.pendingRequests.add(link);
 
     let response;
 
@@ -28,7 +29,7 @@ class CmsLinkStore {
         {
           link(
             where: {
-              slug: "${slug}"
+              slug: "${link}"
             }
           ) {
             slug
@@ -38,26 +39,19 @@ class CmsLinkStore {
         }
       `);
     } catch (error) {
-      throw new Error(error.message);
+      throw new LinkFetchError(error.message);
     } finally {
-      this.pendingRequests.delete(slug);
+      this.pendingRequests.delete(link);
     }
 
     const { data } = response;
+    const linkData = data?.link;
 
-    if (!data.link) {
+    if (!linkData) {
       return;
     }
 
-    this.setLink({ link: data.link });
-  }
-
-  setLink({ link }) {
-    const slug = link.slug;
-
-    if (slug) {
-      this.link[slug] = link;
-    }
+    this.link[linkData.slug] = linkData;
   }
 }
 

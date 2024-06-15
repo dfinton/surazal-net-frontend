@@ -18,3 +18,10 @@ export class BlogPostCountFetchError extends Error {
     this.name = "BlogPostCountFetchError";
   }
 }
+
+export class LinkFetchError extends Error {
+  constructor(message) {
+    super(`Error fetching Link data: ${message}`);
+    this.name = "BlogPostCountFetchError";
+  }
+}
