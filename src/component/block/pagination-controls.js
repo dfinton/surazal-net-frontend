@@ -29,8 +29,8 @@ const paginationStyle = css`
 
 class PaginationControlsBlock extends LitElement {
   static properties = {
-    pageSize: {},
     page: {},
+    pageSize: {},
     total: {},
   };
 
@@ -41,7 +41,7 @@ class PaginationControlsBlock extends LitElement {
     paginationStyle,
   ];
 
-  _dispatchPageClickEvent(pageNumber) {
+  _dispatchPaginationClickEvent(pageNumber) {
     return (e) => {
       const isActive = e.target.classList.contains("active");
 
@@ -50,7 +50,7 @@ class PaginationControlsBlock extends LitElement {
       }
 
       this.dispatchEvent(
-        new CustomEvent("page-click", {
+        new CustomEvent("pagination-click", {
           bubbles: true,
           composed: true,
           detail: { page: pageNumber },
@@ -67,12 +67,12 @@ class PaginationControlsBlock extends LitElement {
     const previousButtonsClass = `button ${isFirstPage ? "inactive" : "active"}`;
     const nextButtonsClass = `button ${isLastPage ? "inactive" : "active"}`;
 
-    const firstPageClickEvent = this._dispatchPageClickEvent(1);
-    const previousPageClickEvent = this._dispatchPageClickEvent(Math.max(page - 1, 1));
-    const nextPageClickEvent = this._dispatchPageClickEvent(
+    const firstPageClickEvent = this._dispatchPaginationClickEvent(1);
+    const previousPageClickEvent = this._dispatchPaginationClickEvent(Math.max(page - 1, 1));
+    const nextPageClickEvent = this._dispatchPaginationClickEvent(
       Math.min(page + 1, totalPages),
     );
-    const lastPageClickEvent = this._dispatchPageClickEvent(totalPages);
+    const lastPageClickEvent = this._dispatchPaginationClickEvent(totalPages);
 
     let firstPageButton = html`
       <span
@@ -130,7 +130,7 @@ class PaginationControlsBlock extends LitElement {
     for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
       const isCurrentPage = page === currentPage;
       const pageButtonClass = `button ${isCurrentPage ? "inactive" : "active"}`;
-      const pageClickEvent = this._dispatchPageClickEvent(currentPage);
+      const pageClickEvent = this._dispatchPaginationClickEvent(currentPage);
 
       let pageButton = html`
         <span

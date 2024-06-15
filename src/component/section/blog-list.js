@@ -1,15 +1,12 @@
-import { html, LitElement } from "lit-element";
+import { html } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
-import getParam from "@/service/url-search-params";
 import cmsPostStore from "@/store/cms-post";
 import containerStyle from "@/style/container";
-import pageStyle from "@/style/page";
+import sectionStyle from "@/style/section";
 
 import "@/component/block/blog-post-summary.js";
 import "@/component/block/pagination-controls.js";
-import "@/component/section/header";
-import "@/component/section/footer";
 
 const postStoreErrorHandler = () => {
   return (error) => {
@@ -20,22 +17,23 @@ const postStoreErrorHandler = () => {
   };
 };
 
-class BlogPage extends MobxLitElement {
-  static styles = [containerStyle, pageStyle];
+class BlogListSection extends MobxLitElement {
+  static properties = {
+    page: {},
+    pageSize: {},
+  }
+
+  static styles = [containerStyle, sectionStyle];
 
   cmsPostStore;
-  page;
-  pageSize;
 
   constructor() {
     super();
 
     this.cmsPostStore = cmsPostStore;
-    this.page = getParam("page") ?? 1;
-    this.pageSize = 20;
   }
 
-  _handlePageClickEvent(e) {
+  _handlePaginationClickEvent(e) {
     const url = new URL(location);
     const page = e.detail.page;
 
@@ -66,7 +64,7 @@ class BlogPage extends MobxLitElement {
           page="${this.page}"
           pageSize="${this.pageSize}"
           total="${this.cmsPostStore.postCount}"
-          @page-click="${this._handlePageClickEvent}"
+          @pagination-click="${this._handlePaginationClickEvent}"
         ></pagination-controls-block>
       </div>
     `;
@@ -86,17 +84,13 @@ class BlogPage extends MobxLitElement {
     });
 
     return html`
-      <div class="root-page">
-        <header-section></header-section>
-        <div class="root-section">
-          ${paginationContainer}
-          ${postSummaryContainers}
-          ${paginationContainer}
-        </div>
-        <footer-section></footer-section>
+      <div class="root-section">
+        ${paginationContainer}
+        ${postSummaryContainers}
+        ${paginationContainer}
       </div>
     `;
   }
 }
 
-customElements.define("blog-page", BlogPage);
+customElements.define("blog-list-section", BlogListSection);
