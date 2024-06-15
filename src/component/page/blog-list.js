@@ -17,7 +17,7 @@ class BlogListPage extends LitElement {
     super();
 
     this.page = getParam("page") ?? 1;
-    this.pageSize = 1;
+    this.pageSize = 20;
   }
 
   render() {
