@@ -1,6 +1,5 @@
 import { html, LitElement } from "lit-element";
 
-import containerStyle from "@/style/container";
 import sectionStyle from "@/style/section";
 
 import "@/component/block/blog-post-body.js";
@@ -11,7 +10,7 @@ class BlogPostSection extends LitElement {
     post: {},
   };
 
-  static styles = [containerStyle, sectionStyle];
+  static styles = [sectionStyle];
 
   render() {
     return html`

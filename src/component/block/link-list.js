@@ -2,10 +2,8 @@ import { html } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
 import cmsLinkStore from "@/store/cms-link";
-import commonElementStyle from "@/style/common-element";
+import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
-import listStyle from "@/style/list";
-import utilityStyle from "@/style/utility";
 
 class LinkListBlock extends MobxLitElement {
   static properties = {
@@ -13,7 +11,7 @@ class LinkListBlock extends MobxLitElement {
     listStyle: {},
   };
 
-  static styles = [commonElementStyle, layoutStyle, listStyle, utilityStyle];
+  static styles = [elementStyle, layoutStyle];
 
   cmsLinkStore;
 

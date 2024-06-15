@@ -10,4 +10,16 @@ export default css`
     border: 0.25rem outset var(--dark-border-color);
     overflow: hidden;
   }
+
+  .light-container {
+    background-color: var(--light-background-color);
+  }
+
+  .dark-container {
+    background-color: var(--dark-background-color);
+  }
+
+  .clear-container {
+    background-color: var(--clear-background-color);
+  }
 `;

@@ -13,4 +13,16 @@ export default css`
     justify-content: space-evenly;
     gap: 1rem;
   }
+
+  .left {
+    text-align: left;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .right {
+    text-align: right;
+  }
 `;

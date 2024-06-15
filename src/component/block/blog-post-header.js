@@ -3,9 +3,8 @@ import { MobxLitElement } from "@adobe/lit-mobx";
 
 import ConvertDocumentObjectToElement from "@/mixin/convert-cms-document-object";
 import cmsPostStore from "@/store/cms-post";
-import commonElementStyle from "@/style/common-element";
+import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
-import utilityStyle from "@/style/utility";
 
 const blogPostStoreErrorHandler =
   ({ post }) =>
@@ -22,7 +21,7 @@ class BlogPostHeaderBlock extends ConvertDocumentObjectToElement(
     post: {},
   };
 
-  static styles = [commonElementStyle, layoutStyle, utilityStyle];
+  static styles = [elementStyle, layoutStyle];
 
   cmsPostStore;
 

@@ -1,21 +1,19 @@
 import { html, LitElement } from "lit-element";
 
-import containerStyle from "@/style/container";
 import pageStyle from "@/style/page";
 
+import "@/component/section/content";
 import "@/component/section/header";
 import "@/component/section/footer";
 
 class LinksPage extends LitElement {
-  static styles = [containerStyle, pageStyle];
+  static styles = [pageStyle];
 
   render() {
     return html`
       <div class="root-page">
         <header-section></header-section>
-        <div class="root-section">
-          <div class="dark-container">Links Placeholder</div>
-        </div>
+        <content-section section="fractals"></content-section>
         <footer-section></footer-section>
       </div>
     `;

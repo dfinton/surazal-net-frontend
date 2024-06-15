@@ -2,7 +2,6 @@ import { html } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
 import cmsPostStore from "@/store/cms-post";
-import containerStyle from "@/style/container";
 import sectionStyle from "@/style/section";
 
 import "@/component/block/blog-post-summary.js";
@@ -23,7 +22,7 @@ class BlogListSection extends MobxLitElement {
     pageSize: {},
   };
 
-  static styles = [containerStyle, sectionStyle];
+  static styles = [sectionStyle];
 
   cmsPostStore;
 

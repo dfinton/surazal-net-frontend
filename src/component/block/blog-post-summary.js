@@ -1,30 +1,9 @@
 import { html, css, LitElement } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
-import commonElementStyle from "@/style/common-element";
+import blogStyle from "@/style/blog";
+import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
-import utilityStyle from "@/style/utility";
-
-const blogPostListStyle = css`
-  .blog-post-list-entry {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-  }
-
-  .blog-post-list-entry > .timestamp {
-    flex: 0 1 10rem;
-  }
-
-  .blog-post-list-entry > .title {
-    flex: 1 1;
-  }
-
-  .blog-post-list-entry > .author {
-    flex: 0 1 10rem;
-    text-align: right;
-  }
-`;
 
 class BlogPostSummaryBlock extends LitElement {
   static properties = {
@@ -35,12 +14,7 @@ class BlogPostSummaryBlock extends LitElement {
     createdAt: {},
   };
 
-  static styles = [
-    blogPostListStyle,
-    commonElementStyle,
-    layoutStyle,
-    utilityStyle,
-  ];
+  static styles = [blogStyle, elementStyle, layoutStyle];
 
   render() {
     const createdAtLocale = new Date(this.createdAt).toLocaleDateString(

@@ -1,31 +1,8 @@
 import { html, css, LitElement } from "lit-element";
 
-import commonElementStyle from "@/style/common-element";
+import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
-import utilityStyle from "@/style/utility";
-
-const paginationStyle = css`
-  .button {
-    text-align: center;
-    padding: 0.25rem 0.25rem 0.125rem;
-    border-radius: 0.25rem;
-    display: inline-block;
-    text-align: center;
-    margin: 0 0.125rem 0 0.125rem;
-    min-width: 1rem;
-    border-radius: 0.25rem;
-    border: 0.125rem outset var(--light-border-color);
-  }
-
-  .button.inactive {
-    background-color: var(--dark-background-color);
-  }
-
-  .button.active {
-    background-color: var(--light-background-color);
-    cursor: pointer;
-  }
-`;
+import paginationStyle from "@/style/pagination"
 
 class PaginationControlsBlock extends LitElement {
   static properties = {
@@ -34,12 +11,7 @@ class PaginationControlsBlock extends LitElement {
     total: {},
   };
 
-  static styles = [
-    commonElementStyle,
-    layoutStyle,
-    utilityStyle,
-    paginationStyle,
-  ];
+  static styles = [elementStyle, layoutStyle, paginationStyle];
 
   _dispatchPaginationClickEvent(pageNumber) {
     return (e) => {

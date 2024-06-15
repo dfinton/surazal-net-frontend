@@ -1,6 +1,5 @@
 import { html, LitElement } from "lit-element";
 
-import containerStyle from "@/style/container";
 import layoutStyle from "@/style/layout";
 import sectionStyle from "@/style/section";
 
@@ -8,7 +7,7 @@ import "@/component/block/content";
 import "@/component/block/link-list";
 
 class FooterSection extends LitElement {
-  static styles = [containerStyle, sectionStyle, layoutStyle];
+  static styles = [sectionStyle, layoutStyle];
 
   render() {
     return html`

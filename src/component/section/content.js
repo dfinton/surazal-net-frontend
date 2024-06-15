@@ -1,6 +1,5 @@
 import { html, LitElement } from "lit-element";
 
-import containerStyle from "@/style/container";
 import sectionStyle from "@/style/section";
 
 import "@/component/block/content";
@@ -10,7 +9,7 @@ class ContentContainer extends LitElement {
     section: {},
   };
 
-  static styles = [containerStyle, sectionStyle];
+  static styles = [sectionStyle];
 
   render() {
     return html`

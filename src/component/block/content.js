@@ -3,9 +3,8 @@ import { MobxLitElement } from "@adobe/lit-mobx";
 
 import ConvertDocumentObjectToElement from "@/mixin/convert-cms-document-object";
 import cmsPageStore from "@/store/cms-page";
-import commonElementStyle from "@/style/common-element";
+import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
-import utilityStyle from "@/style/utility";
 
 const pageStoreErrorHandler =
   ({ section }) =>
@@ -20,7 +19,7 @@ class ContentBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
     section: {},
   };
 
-  static styles = [commonElementStyle, layoutStyle, utilityStyle];
+  static styles = [elementStyle, layoutStyle];
 
   cmsPageStore;
 
