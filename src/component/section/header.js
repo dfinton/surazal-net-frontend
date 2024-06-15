@@ -13,7 +13,7 @@ class HeaderSection extends LitElement {
     return html`
       <div class="root-section">
         <div class="light-container">
-          <content-block  section="page-header"></content-block>
+          <content-block section="page-header"></content-block>
         </div>
         <div class="dark-container">
           <link-list-block

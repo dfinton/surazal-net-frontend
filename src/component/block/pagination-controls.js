@@ -68,7 +68,9 @@ class PaginationControlsBlock extends LitElement {
     const nextButtonsClass = `button ${isLastPage ? "inactive" : "active"}`;
 
     const firstPageClickEvent = this._dispatchPaginationClickEvent(1);
-    const previousPageClickEvent = this._dispatchPaginationClickEvent(Math.max(page - 1, 1));
+    const previousPageClickEvent = this._dispatchPaginationClickEvent(
+      Math.max(page - 1, 1),
+    );
     const nextPageClickEvent = this._dispatchPaginationClickEvent(
       Math.min(page + 1, totalPages),
     );

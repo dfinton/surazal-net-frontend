@@ -9,7 +9,7 @@ import "@/component/block/blog-post-header.js";
 class BlogPostSection extends LitElement {
   static properties = {
     post: {},
-  }
+  };
 
   static styles = [containerStyle, sectionStyle];
 

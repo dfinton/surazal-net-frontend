@@ -24,7 +24,10 @@ class BlogListPage extends LitElement {
     return html`
       <div class="root-page">
         <header-section></header-section>
-        <blog-list-section page="${this.page}" pageSize="${this.pageSize}"></blog-list-section>
+        <blog-list-section
+          page="${this.page}"
+          pageSize="${this.pageSize}"
+        ></blog-list-section>
         <footer-section></footer-section>
       </div>
     `;

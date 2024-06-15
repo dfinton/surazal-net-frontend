@@ -21,7 +21,7 @@ class BlogListSection extends MobxLitElement {
   static properties = {
     page: {},
     pageSize: {},
-  }
+  };
 
   static styles = [containerStyle, sectionStyle];
 
@@ -69,25 +69,25 @@ class BlogListSection extends MobxLitElement {
       </div>
     `;
 
-    const postSummaryContainers = this.cmsPostStore.postSummaryList.map((postSummary) => {
-      return html`
-        <div class="dark-container">
-          <blog-post-summary-block
-            post="${postSummary.slug}"
-            title="${postSummary.title}"
-            authorName="${postSummary.author?.name}"
-            authorEmail="${postSummary.author?.email}"
-            createdAt="${postSummary.createdAt}"
-          ></blog-post-summary-block>
-        </div>
-      `;
-    });
+    const postSummaryContainers = this.cmsPostStore.postSummaryList.map(
+      (postSummary) => {
+        return html`
+          <div class="dark-container">
+            <blog-post-summary-block
+              post="${postSummary.slug}"
+              title="${postSummary.title}"
+              authorName="${postSummary.author?.name}"
+              authorEmail="${postSummary.author?.email}"
+              createdAt="${postSummary.createdAt}"
+            ></blog-post-summary-block>
+          </div>
+        `;
+      },
+    );
 
     return html`
       <div class="root-section">
-        ${paginationContainer}
-        ${postSummaryContainers}
-        ${paginationContainer}
+        ${paginationContainer} ${postSummaryContainers} ${paginationContainer}
       </div>
     `;
   }

@@ -15,7 +15,9 @@ const blogPostStoreErrorHandler =
       error.message,
     );
 
-class BlogPostHeaderBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
+class BlogPostHeaderBlock extends ConvertDocumentObjectToElement(
+  MobxLitElement,
+) {
   static properties = {
     post: {},
   };
@@ -57,22 +59,24 @@ class BlogPostHeaderBlock extends ConvertDocumentObjectToElement(MobxLitElement)
     const authorEmail = post?.author?.email;
     const createdAt = post?.createdAt;
 
-    const createdAtLocale = new Date(
-      createdAt,
-    ).toLocaleDateString("en-US", {
+    const createdAtLocale = new Date(createdAt).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
     });
 
-    let authorContent = html`<h4>Anonymously authored at ${createdAtLocale}</h4>`;
+    let authorContent = html`<h4>
+      Anonymously authored at ${createdAtLocale}
+    </h4>`;
 
     if (authorName) {
-      const authorEmailLink = authorEmail ?
-        html`<a href="mailto:${authorEmail}">${authorName}</a>` :
-        html`${authorName}`;
+      const authorEmailLink = authorEmail
+        ? html`<a href="mailto:${authorEmail}">${authorName}</a>`
+        : html`${authorName}`;
 
-      authorContent = html`<h4>by ${authorEmailLink} at ${createdAtLocale}</h4>`
+      authorContent = html`<h4>
+        by ${authorEmailLink} at ${createdAtLocale}
+      </h4>`;
     }
 
     return html`

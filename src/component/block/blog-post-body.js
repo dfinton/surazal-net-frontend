@@ -66,11 +66,7 @@ class BlogPostBodyBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
       });
     }
 
-    return html`
-      <div class="content-block">
-        ${htmlContent}
-      </div>
-    `;
+    return html` <div class="content-block">${htmlContent}</div> `;
   }
 }
 

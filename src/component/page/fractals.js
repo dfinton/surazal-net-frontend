@@ -14,9 +14,7 @@ class FractalsPage extends LitElement {
       <div class="root-page">
         <header-section></header-section>
         <div class="root-section">
-          <div class="dark-container">
-            Fractals Placeholder
-          </div>
+          <div class="dark-container">Fractals Placeholder</div>
         </div>
         <footer-section></footer-section>
       </div>

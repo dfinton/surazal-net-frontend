@@ -43,21 +43,20 @@ class BlogPostSummaryBlock extends LitElement {
   ];
 
   render() {
-    const createdAtLocale = new Date(
-      this.createdAt,
-    ).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    const createdAtLocale = new Date(this.createdAt).toLocaleDateString(
+      "en-US",
+      {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      },
+    );
 
     return html`
       <div class="content-block blog-post-list-entry">
         <span class="timestamp"> ${createdAtLocale} </span>
         <span class="title">
-          <a href="/blog/post?post=${this.post}">
-            ${this.title}
-          </a>
+          <a href="/blog/post?post=${this.post}"> ${this.title} </a>
         </span>
         <span class="author">${this.authorName}</span>
       </div>
