@@ -2,7 +2,7 @@ import { html, css, LitElement } from "lit-element";
 
 import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
-import paginationStyle from "@/style/pagination"
+import paginationStyle from "@/style/pagination";
 
 class PaginationControlsBlock extends LitElement {
   static properties = {
