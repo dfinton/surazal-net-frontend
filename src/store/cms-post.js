@@ -1,78 +1,82 @@
 import { makeObservable, observable, action } from "mobx";
+
+import { BlogPostListFetchError, BlogPostDataFetchError, BlogPostCountFetchError } from "@/error";
 import cms from "@/service/cms";
 
 class CmsPostStore {
   post = {};
-  latestPostId = undefined;
-  postSummaryList = [];
+  postPendingRequests = new Set();
+
+  latestPost = undefined;
+  latestPostPendingRequest = false;
+  
   postCount = undefined;
-  page = 1;
-  pageSize = 10;
-  pageCount = 0;
+  postCountPendingRequest = false;
+
+  postSummaryList = [];
 
   constructor() {
     makeObservable(this, {
       post: observable,
-      latestPostId: observable,
-      postSummaryList: observable,
+      latestPost: observable,
       postCount: observable,
-      page: observable,
-      pageSize: observable,
-      pageCount: observable,
+      postSummaryList: observable,
       fetchLatestPost: action,
       fetchPost: action,
-      fetchPostList: action,
+      fetchPostSummaryList: action,
       fetchPostCount: action,
-      calculatePageCount: action,
-      setPost: action,
-      setLatestPostId: action,
-      setPostSummaryList: action,
-      setPostCount: action,
-      setPage: action,
-      setPageSize: action,
-      setPageCount: action,
     });
   }
 
   async fetchPost({ post }) {
-    if (this.post[post]) {
+    if (!post || this.post[post] || this.postPendingRequests.has(post)) {
       return;
     }
 
-    const data = await cms(`
-      {
-        post(
-          where: {
-            slug: "${post}"
-          }
-        ) {
-          slug
-          title
-          content {
-            document
-          }
-          author {
-            name
-            email
-          }
-          createdAt
-          fractals {
+    this.postPendingRequests.add(post);
+
+    let data;
+
+    try {
+      data = await cms(`
+        {
+          post(
+            where: {
+              slug: "${post}"
+            }
+          ) {
             slug
-            altText
-            thumbnail {
-              slug
+            title
+            content {
+              document
+            }
+            author {
               name
-              file {
-                filesize
-                width
-                height
-                url
+              email
+            }
+            createdAt
+            fractals {
+              slug
+              altText
+              thumbnail {
+                slug
+                name
+                file {
+                  filesize
+                  width
+                  height
+                  url
+                }
               }
             }
           }
         }
-      }
-    `);
+      `);
+    } catch(error) {
+      throw new BlogPostDataFetchError(error.message);
+    } finally {
+      this.postPendingRequests.delete(post);
+    }
 
     const postData = data?.data?.post;
 
@@ -80,49 +84,59 @@ class CmsPostStore {
       return;
     }
 
-    this.setPost({ post: postData });
+    this.post[postData.slug] = postData;
   }
 
   async fetchLatestPost() {
-    if (this.latestPostId !== undefined) {
+    if (this.latestPost !== undefined || this.latestPostPendingRequest) {
       return;
     }
 
-    const data = await cms(`
-      {
-        posts(
-          orderBy: [{
-            createdAt: desc
-          }]
-          take: 1
-        ) {
-          slug
-          title
-          content {
-            document
-          }
-          author {
-            name
-            email
-          }
-          createdAt
-          fractals {
+    this.latestPostPendingRequest = true;
+
+    let data;
+
+    try {
+      data = await cms(`
+        {
+          posts(
+            orderBy: [{
+              createdAt: desc
+            }]
+            take: 1
+          ) {
             slug
-            altText
-            thumbnail {
-              slug
+            title
+            content {
+              document
+            }
+            author {
               name
-              file {
-                filesize
-                width
-                height
-                url
+              email
+            }
+            createdAt
+            fractals {
+              slug
+              altText
+              thumbnail {
+                slug
+                name
+                file {
+                  filesize
+                  width
+                  height
+                  url
+                }
               }
             }
           }
         }
-      }
-    `);
+      `);
+    } catch(error) {
+      throw new BlogPostDataFetchError(error.message);
+    } finally {
+      this.latestPostPendingRequest = false;
+    }
 
     const postData = data?.data?.post;
 
@@ -130,89 +144,69 @@ class CmsPostStore {
       return;
     }
 
-    this.setPost({ post: postData });
-    this.setLatestPostId({ post: postData.slug });
+    this.post[postData.slug] = postData;
+    this.latestPost = postData.slug;
   }
 
-  async fetchPostList({ page, pageSize }) {
+  async fetchPostSummaryList({ page, pageSize }) {
     const take = pageSize;
     const skip = (page - 1) * pageSize;
 
-    const data = await cms(`
-      {
-        posts(
-          orderBy: [{
-            createdAt: desc
-          }]
-          take: ${take}
-          skip: ${skip}
-        ) {
-          slug
-          title
-          author {
-            name
-            email
+    let data;
+
+    try {
+      data = await cms(`
+        {
+          posts(
+            orderBy: [{
+              createdAt: desc
+            }]
+            take: ${take}
+            skip: ${skip}
+          ) {
+            slug
+            title
+            author {
+              name
+              email
+            }
+            createdAt
           }
-          createdAt
         }
-      }
-    `);
+      `);
+    } catch(error) {
+      throw new BlogPostListFetchError(error.message);
+    }
 
-    const posts = data?.data?.posts ?? [];
+    const postsData = data?.data?.posts ?? [];
 
-    this.setPostSummaryList({ postSummaryList: posts });
-    this.setPage({ page });
-    this.setPageSize({ pageSize });
+    this.postSummaryList = postsData;
   }
 
   async fetchPostCount() {
-    if (this.postCount !== undefined) {
+    if (this.postCount !== undefined || this.postCountPendingRequest) {
       return;
     }
 
-    const data = await cms(`
-      {
-        postsCount
-      }
-    `);
+    this.postCountPendingRequest = true;
+
+    let data;
+
+    try {
+      data = await cms(`
+        {
+          postsCount
+        }
+      `);
+    } catch(error) {
+      throw new BlogPostCountFetchError(error.message);
+    } finally {
+      this.postCountPendingRequest = false;
+    }
 
     const postCount = data?.data?.postsCount ?? 0;
 
-    this.setPostCount({ postCount });
-  }
-
-  calculatePageCount() {
-    const pageCount = Math.ceil(this.postCount / this.pageSize);
-
-    this.setPageCount({ pageCount });
-  }
-
-  setLatestPostId({ post }) {
-    this.latestPostId = post;
-  }
-
-  setPost({ post }) {
-    this.post[post.slug] = post;
-  }
-
-  setPostSummaryList({ postSummaryList }) {
-    this.postSummaryList = postSummaryList;
-  }
-
-  setPostCount({ postCount }) {
     this.postCount = postCount;
-  }
-
-  setPage({ page }) {
-    this.page = page;
-  }
-
-  setPageSize({ pageSize }) {
-    this.pageSize = pageSize;
-  }
-
-  setPageCount({ pageCount }) {
-    this.pageCount = pageCount;
   }
 }
 

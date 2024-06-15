@@ -7,15 +7,6 @@ import sectionStyle from "@/style/section";
 import "@/component/block/blog-post-summary.js";
 import "@/component/block/pagination-controls.js";
 
-const postStoreErrorHandler = () => {
-  return (error) => {
-    console.error(
-      `An error was encountered fetching post list data:`,
-      error.message,
-    );
-  };
-};
-
 class BlogListSection extends MobxLitElement {
   static properties = {
     page: {},
@@ -32,7 +23,7 @@ class BlogListSection extends MobxLitElement {
     this.cmsPostStore = cmsPostStore;
   }
 
-  _handlePaginationClickEvent(e) {
+  async _handlePaginationClickEvent(e) {
     const url = new URL(location);
     const page = e.detail.page;
 
@@ -41,19 +32,22 @@ class BlogListSection extends MobxLitElement {
 
     this.page = page;
 
-    this.cmsPostStore
-      .fetchPostList({ page: this.page, pageSize: this.pageSize })
-      .catch(postStoreErrorHandler({ page: this.page }));
+    try {
+      await this.cmsPostStore.fetchPostSummaryList({ page: this.page, pageSize: this.pageSize })
+    } catch(error) {
+      console.error(error);
+    }
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     super.connectedCallback();
 
-    this.cmsPostStore
-      .fetchPostList({ page: this.page, pageSize: this.pageSize })
-      .catch(postStoreErrorHandler());
-
-    this.cmsPostStore.fetchPostCount().catch(postStoreErrorHandler());
+    try {
+      await this.cmsPostStore.fetchPostSummaryList({ page: this.page, pageSize: this.pageSize });
+      await this.cmsPostStore.fetchPostCount();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   render() {

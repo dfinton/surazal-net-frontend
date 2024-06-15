@@ -6,14 +6,6 @@ import cmsPostStore from "@/store/cms-post";
 import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
 
-const blogPostStoreErrorHandler =
-  ({ post }) =>
-  (error) =>
-    console.error(
-      `An error was encountered fetching blog post data for slug "${post}":`,
-      error.message,
-    );
-
 class BlogPostHeaderBlock extends ConvertDocumentObjectToElement(
   MobxLitElement,
 ) {
@@ -25,23 +17,27 @@ class BlogPostHeaderBlock extends ConvertDocumentObjectToElement(
 
   cmsPostStore;
 
-  connectedCallback() {
+  async connectedCallback() {
     super.connectedCallback();
 
-    this.cmsPostStore
-      .fetchPost({ post: this.post })
-      .catch(blogPostStoreErrorHandler({ post: this.post }));
+    try {
+      await this.cmsPostStore.fetchPost({ post: this.post });
+    } catch(error) {
+      console.error(error);
+    }
   }
 
-  willUpdate(changedProperties) {
+  async willUpdate(changedProperties) {
     if (!changedProperties.size) {
       return;
     }
 
     if (changedProperties.has("post")) {
-      this.cmsPostStore
-        .fetchPost({ post: this.post })
-        .catch(blogPostStoreErrorHandler({ post: this.post }));
+      try {
+        await this.cmsPostStore.fetchPost({ post: this.post });
+      } catch(error) {
+        console.error(error);
+      }
     }
   }
 

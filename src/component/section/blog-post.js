@@ -15,7 +15,7 @@ class BlogPostSection extends LitElement {
   render() {
     return html`
       <div class="root-section">
-        <div class="dark-container">
+        <div class="light-container">
           <blog-post-header-block post="${this.post}"></blog-post-header-block>
         </div>
         <div class="dark-container">
