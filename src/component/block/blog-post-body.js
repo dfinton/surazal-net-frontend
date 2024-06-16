@@ -19,8 +19,8 @@ class BlogPostBodyBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
     super.connectedCallback();
 
     try {
-      await this.cmsPostStore.fetchPost({ post: this.post })
-    } catch(error) {
+      await this.cmsPostStore.fetchPost({ post: this.post });
+    } catch (error) {
       console.error(error);
     }
   }
@@ -32,8 +32,8 @@ class BlogPostBodyBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
 
     if (changedProperties.has("post")) {
       try {
-        await this.cmsPostStore.fetchPost({ post: this.post })
-      } catch(error) {
+        await this.cmsPostStore.fetchPost({ post: this.post });
+      } catch (error) {
         console.error(error);
       }
     }

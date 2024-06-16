@@ -33,8 +33,11 @@ class BlogListSection extends MobxLitElement {
     this.page = page;
 
     try {
-      await this.cmsPostStore.fetchPostSummaryList({ page: this.page, pageSize: this.pageSize })
-    } catch(error) {
+      await this.cmsPostStore.fetchPostSummaryList({
+        page: this.page,
+        pageSize: this.pageSize,
+      });
+    } catch (error) {
       console.error(error);
     }
   }
@@ -43,7 +46,10 @@ class BlogListSection extends MobxLitElement {
     super.connectedCallback();
 
     try {
-      await this.cmsPostStore.fetchPostSummaryList({ page: this.page, pageSize: this.pageSize });
+      await this.cmsPostStore.fetchPostSummaryList({
+        page: this.page,
+        pageSize: this.pageSize,
+      });
       await this.cmsPostStore.fetchPostCount();
     } catch (error) {
       console.error(error);

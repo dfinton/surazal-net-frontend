@@ -19,8 +19,8 @@ class ContentBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
     super.connectedCallback();
 
     try {
-      this.cmsPageStore.fetchPage({ section: this.section })
-    } catch(error) {
+      this.cmsPageStore.fetchPage({ section: this.section });
+    } catch (error) {
       console.error(error);
     }
   }
@@ -32,8 +32,8 @@ class ContentBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
 
     if (changedProperties.has("section")) {
       try {
-        this.cmsPageStore.fetchPage({ section: this.section })
-      } catch(error) {
+        this.cmsPageStore.fetchPage({ section: this.section });
+      } catch (error) {
         console.error(error);
       }
     }

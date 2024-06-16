@@ -22,7 +22,7 @@ class BlogPostHeaderBlock extends ConvertDocumentObjectToElement(
 
     try {
       await this.cmsPostStore.fetchPost({ post: this.post });
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
   }
@@ -35,7 +35,7 @@ class BlogPostHeaderBlock extends ConvertDocumentObjectToElement(
     if (changedProperties.has("post")) {
       try {
         await this.cmsPostStore.fetchPost({ post: this.post });
-      } catch(error) {
+      } catch (error) {
         console.error(error);
       }
     }

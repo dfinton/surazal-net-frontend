@@ -17,11 +17,7 @@ class CmsPageStore {
   }
 
   async fetchPage({ section }) {
-    if (
-      !section ||
-      this.page[section] ||
-      this.pendingRequests.has(section)
-    ) {
+    if (!section || this.page[section] || this.pendingRequests.has(section)) {
       return;
     }
 

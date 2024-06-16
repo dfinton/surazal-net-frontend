@@ -1,6 +1,10 @@
 import { makeObservable, observable, action } from "mobx";
 
-import { BlogPostListFetchError, BlogPostDataFetchError, BlogPostCountFetchError } from "@/error";
+import {
+  BlogPostListFetchError,
+  BlogPostDataFetchError,
+  BlogPostCountFetchError,
+} from "@/error";
 import cms from "@/service/cms";
 
 class CmsPostStore {
@@ -9,7 +13,7 @@ class CmsPostStore {
 
   latestPost = undefined;
   latestPostPendingRequest = false;
-  
+
   postCount = undefined;
   postCountPendingRequest = false;
 
@@ -76,7 +80,7 @@ class CmsPostStore {
           }
         }
       `);
-    } catch(error) {
+    } catch (error) {
       throw new BlogPostDataFetchError(error.message);
     } finally {
       this.postPendingRequests.delete(post);
@@ -136,7 +140,7 @@ class CmsPostStore {
           }
         }
       `);
-    } catch(error) {
+    } catch (error) {
       throw new BlogPostDataFetchError(error.message);
     } finally {
       this.latestPostPendingRequest = false;
@@ -149,7 +153,7 @@ class CmsPostStore {
     }
 
     this.setPost({ postData });
-    this.setLatestPost({ postData })
+    this.setLatestPost({ postData });
   }
 
   async fetchPostSummaryList({ page, pageSize }) {
@@ -178,13 +182,13 @@ class CmsPostStore {
           }
         }
       `);
-    } catch(error) {
+    } catch (error) {
       throw new BlogPostListFetchError(error.message);
     }
 
     const postSummaryList = data?.data?.posts ?? [];
 
-    this.setPostSummaryList({ postSummaryList} );
+    this.setPostSummaryList({ postSummaryList });
   }
 
   async fetchPostCount() {
@@ -202,7 +206,7 @@ class CmsPostStore {
           postsCount
         }
       `);
-    } catch(error) {
+    } catch (error) {
       throw new BlogPostCountFetchError(error.message);
     } finally {
       this.postCountPendingRequest = false;

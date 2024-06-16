@@ -15,8 +15,14 @@ class FooterSection extends LitElement {
         <div class="dark-container">
           <div class="content-block column-layout">
             <content-block section="page-footer"></content-block>
-            <link-list-block linkList="site-links" listStyle="undecorated"></link-list-block>
-            <link-list-block linkList="social-web" listStyle="undecorated"></link-list-block>
+            <link-list-block
+              linkList="site-links"
+              listStyle="undecorated"
+            ></link-list-block>
+            <link-list-block
+              linkList="social-web"
+              listStyle="undecorated"
+            ></link-list-block>
           </div>
         </div>
       </div>
