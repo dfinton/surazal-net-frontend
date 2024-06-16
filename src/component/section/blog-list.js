@@ -1,27 +1,19 @@
 import { html } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
-import cmsPostStore from "@/store/cms-post";
+import CmsPostMixin from "@/mixin/cms-post";
 import sectionStyle from "@/style/section";
 
 import "@/component/block/blog-post-summary.js";
 import "@/component/block/pagination-controls.js";
 
-class BlogListSection extends MobxLitElement {
+class BlogListSection extends CmsPostMixin(MobxLitElement) {
   static properties = {
     page: {},
     pageSize: {},
   };
 
   static styles = [sectionStyle];
-
-  cmsPostStore;
-
-  constructor() {
-    super();
-
-    this.cmsPostStore = cmsPostStore;
-  }
 
   async _handlePaginationClickEvent(e) {
     const url = new URL(location);
@@ -32,28 +24,16 @@ class BlogListSection extends MobxLitElement {
 
     this.page = page;
 
-    try {
-      await this.cmsPostStore.fetchPostSummaryList({
-        page: this.page,
-        pageSize: this.pageSize,
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    await this.fetchCmsPostSummaryList({ page: this.page, pageSize: this.pageSize });
   }
 
   async connectedCallback() {
     super.connectedCallback();
 
-    try {
-      await this.cmsPostStore.fetchPostSummaryList({
-        page: this.page,
-        pageSize: this.pageSize,
-      });
-      await this.cmsPostStore.fetchPostCount();
-    } catch (error) {
-      console.error(error);
-    }
+    await Promise.all([
+      this.fetchCmsPostSummaryList({ page: this.page, pageSize: this.pageSize }),
+      this.fetchCmsPostCount(),
+    ]);
   }
 
   render() {

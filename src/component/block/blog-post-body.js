@@ -1,28 +1,22 @@
 import { html } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
-import ConvertDocumentObjectToElement from "@/mixin/convert-cms-document-object";
-import cmsPostStore from "@/store/cms-post";
+import CmsPostMixin from "@/mixin/cms-post";
+import ConvertCmsDocumentObjectMixin from "@/mixin/convert-cms-document-object";
 import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
 
-class BlogPostBodyBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
+class BlogPostBodyBlock extends CmsPostMixin(ConvertCmsDocumentObjectMixin(MobxLitElement)) {
   static properties = {
     post: {},
   };
 
   static styles = [elementStyle, layoutStyle];
 
-  cmsPostStore;
-
   async connectedCallback() {
     super.connectedCallback();
 
-    try {
-      await this.cmsPostStore.fetchPost({ post: this.post });
-    } catch (error) {
-      console.error(error);
-    }
+    await this.fetchCmsPost({ post: this.post });
   }
 
   async willUpdate(changedProperties) {
@@ -31,18 +25,8 @@ class BlogPostBodyBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
     }
 
     if (changedProperties.has("post")) {
-      try {
-        await this.cmsPostStore.fetchPost({ post: this.post });
-      } catch (error) {
-        console.error(error);
-      }
+      await this.fetchCmsPost({ post: this.post });
     }
-  }
-
-  constructor() {
-    super();
-
-    this.cmsPostStore = cmsPostStore;
   }
 
   render() {

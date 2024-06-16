@@ -1,30 +1,21 @@
 import { html } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
-import ConvertDocumentObjectToElement from "@/mixin/convert-cms-document-object";
-import cmsPostStore from "@/store/cms-post";
+import CmsPostMixin from "@/mixin/cms-post";
 import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
 
-class BlogPostHeaderBlock extends ConvertDocumentObjectToElement(
-  MobxLitElement,
-) {
+class BlogPostHeaderBlock extends CmsPostMixin(MobxLitElement) {
   static properties = {
     post: {},
   };
 
   static styles = [elementStyle, layoutStyle];
 
-  cmsPostStore;
-
   async connectedCallback() {
     super.connectedCallback();
 
-    try {
-      await this.cmsPostStore.fetchPost({ post: this.post });
-    } catch (error) {
-      console.error(error);
-    }
+    await this.fetchCmsPost({ post: this.post });
   }
 
   async willUpdate(changedProperties) {
@@ -33,18 +24,8 @@ class BlogPostHeaderBlock extends ConvertDocumentObjectToElement(
     }
 
     if (changedProperties.has("post")) {
-      try {
-        await this.cmsPostStore.fetchPost({ post: this.post });
-      } catch (error) {
-        console.error(error);
-      }
+      await this.fetchCmsPost({ post: this.post });
     }
-  }
-
-  constructor() {
-    super();
-
-    this.cmsPostStore = cmsPostStore;
   }
 
   render() {
@@ -61,7 +42,7 @@ class BlogPostHeaderBlock extends ConvertDocumentObjectToElement(
     });
 
     let authorContent = html`<h4>
-      Anonymously authored at ${createdAtLocale}
+      Anonymously Authored at ${createdAtLocale}
     </h4>`;
 
     if (authorName) {

@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default (SuperClass) =>
-  class ConvertCmsDocumentObject extends SuperClass {
+  class ConvertCmsDocumentObjectMixin extends SuperClass {
     convertDocumentObjectToElement({ documentObject }) {
       if (documentObject.children) {
         let childrenHtml = documentObject.children.map((child, childIndex) => {

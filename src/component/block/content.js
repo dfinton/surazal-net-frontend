@@ -1,12 +1,12 @@
 import { html } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
-import ConvertDocumentObjectToElement from "@/mixin/convert-cms-document-object";
+import ConvertCmsDocumentObjectMixin from "@/mixin/convert-cms-document-object";
 import cmsPageStore from "@/store/cms-page";
 import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
 
-class ContentBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
+class ContentBlock extends ConvertCmsDocumentObjectMixin(MobxLitElement) {
   static properties = {
     section: {},
   };
