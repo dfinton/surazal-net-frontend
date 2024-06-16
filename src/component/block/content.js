@@ -1,28 +1,22 @@
 import { html } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
+import CmsPageMixin from "@/mixin/cms-page";
 import ConvertCmsDocumentObjectMixin from "@/mixin/convert-cms-document-object";
-import cmsPageStore from "@/store/cms-page";
 import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
 
-class ContentBlock extends ConvertCmsDocumentObjectMixin(MobxLitElement) {
+class ContentBlock extends CmsPageMixin(ConvertCmsDocumentObjectMixin(MobxLitElement)) {
   static properties = {
     section: {},
   };
 
   static styles = [elementStyle, layoutStyle];
 
-  cmsPageStore;
-
   async connectedCallback() {
     super.connectedCallback();
 
-    try {
-      this.cmsPageStore.fetchPage({ section: this.section });
-    } catch (error) {
-      console.error(error);
-    }
+    await this.fetchCmsPage({ section: this.section });
   }
 
   async willUpdate(changedProperties) {
@@ -31,18 +25,8 @@ class ContentBlock extends ConvertCmsDocumentObjectMixin(MobxLitElement) {
     }
 
     if (changedProperties.has("section")) {
-      try {
-        this.cmsPageStore.fetchPage({ section: this.section });
-      } catch (error) {
-        console.error(error);
-      }
+      await this.fetchCmsPage({ section: this.section });
     }
-  }
-
-  constructor() {
-    super();
-
-    this.cmsPageStore = cmsPageStore;
   }
 
   render() {

@@ -1,7 +1,7 @@
 import cmsPostStore from "@/store/cms-post";
 
 export default (SuperClass) =>
-  class CmsBlogMixin extends SuperClass {
+  class CmsPostMixin extends SuperClass {
     cmsPostStore;
 
     constructor() {
