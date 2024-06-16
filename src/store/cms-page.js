@@ -1,4 +1,6 @@
 import { makeObservable, observable, action } from "mobx";
+
+import { PageFetchError } from "@/error";
 import cms from "@/service/cms";
 
 class CmsPageStore {
@@ -14,16 +16,16 @@ class CmsPageStore {
     });
   }
 
-  async fetchPage({ sectionSlug }) {
+  async fetchPage({ section }) {
     if (
-      !sectionSlug ||
-      this.page[sectionSlug] ||
-      this.pendingRequests.has(sectionSlug)
+      !section ||
+      this.page[section] ||
+      this.pendingRequests.has(section)
     ) {
       return;
     }
 
-    this.pendingRequests.add(sectionSlug);
+    this.pendingRequests.add(section);
 
     let response;
 
@@ -34,7 +36,7 @@ class CmsPageStore {
             where: {
               section: {
                 slug: {
-                  equals: "${sectionSlug}"
+                  equals: "${section}"
                 }
               }
             }
@@ -55,9 +57,9 @@ class CmsPageStore {
         }
       `);
     } catch (error) {
-      throw new Error(error.message);
+      throw new PageFetchError(error.message);
     } finally {
-      this.pendingRequests.delete(sectionSlug);
+      this.pendingRequests.delete(section);
     }
 
     const { data } = response;
@@ -70,10 +72,10 @@ class CmsPageStore {
   }
 
   setPage({ page }) {
-    const sectionSlug = page.section?.slug;
+    const section = page.section?.slug;
 
-    if (sectionSlug) {
-      this.page[sectionSlug] = page;
+    if (section) {
+      this.page[section] = page;
     }
   }
 }

@@ -6,14 +6,6 @@ import cmsPageStore from "@/store/cms-page";
 import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
 
-const pageStoreErrorHandler =
-  ({ section }) =>
-  (error) =>
-    console.error(
-      `An error was encountered fetching page content data for section "${section}":\n`,
-      error.message,
-    );
-
 class ContentBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
   static properties = {
     section: {},
@@ -23,23 +15,27 @@ class ContentBlock extends ConvertDocumentObjectToElement(MobxLitElement) {
 
   cmsPageStore;
 
-  connectedCallback() {
+  async connectedCallback() {
     super.connectedCallback();
 
-    this.cmsPageStore
-      .fetchPage({ sectionSlug: this.section })
-      .catch(pageStoreErrorHandler({ section: this.section }));
+    try {
+      this.cmsPageStore.fetchPage({ section: this.section })
+    } catch(error) {
+      console.error(error);
+    }
   }
 
-  willUpdate(changedProperties) {
+  async willUpdate(changedProperties) {
     if (!changedProperties.size) {
       return;
     }
 
     if (changedProperties.has("section")) {
-      this.cmsPageStore
-        .fetchPage({ sectionSlug: this.section })
-        .catch(pageStoreErrorHandler({ section: this.section }));
+      try {
+        this.cmsPageStore.fetchPage({ section: this.section })
+      } catch(error) {
+        console.error(error);
+      }
     }
   }
 

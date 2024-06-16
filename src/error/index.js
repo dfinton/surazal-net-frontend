@@ -25,3 +25,10 @@ export class LinkFetchError extends Error {
     this.name = "BlogPostCountFetchError";
   }
 }
+
+export class PageFetchError extends Error {
+  constructor(message) {
+    super(`Error fetching Page data: ${message}`);
+    this.name = "BlogPostCountFetchError";
+  }
+}
