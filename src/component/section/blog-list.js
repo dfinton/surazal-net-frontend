@@ -33,7 +33,7 @@ class BlogListSection extends CmsPostMixin(MobxLitElement) {
   async connectedCallback() {
     super.connectedCallback();
 
-    await Promise.all([
+    await Promise.allSettled([
       this.fetchCmsPostSummaryList({
         page: this.page,
         pageSize: this.pageSize,
