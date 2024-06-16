@@ -12,6 +12,7 @@ class CmsLinkStore {
       link: observable,
       pendingRequests: observable,
       fetchLink: action,
+      setLink: action,
     });
   }
 
@@ -22,10 +23,10 @@ class CmsLinkStore {
 
     this.pendingRequests.add(link);
 
-    let response;
+    let data;
 
     try {
-      response = await cms(`
+      data = await cms(`
         {
           link(
             where: {
@@ -44,13 +45,16 @@ class CmsLinkStore {
       this.pendingRequests.delete(link);
     }
 
-    const { data } = response;
-    const linkData = data?.link;
+    const linkData = data?.data?.link;
 
     if (!linkData) {
       return;
     }
 
+    this.setLink({ linkData });
+  }
+
+  setLink({ linkData }) {
     this.link[linkData.slug] = linkData;
   }
 }

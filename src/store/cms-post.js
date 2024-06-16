@@ -25,6 +25,10 @@ class CmsPostStore {
       fetchPost: action,
       fetchPostSummaryList: action,
       fetchPostCount: action,
+      setPost: action,
+      setLatestPost: action,
+      setPostCount: action,
+      setPostSummaryList: action,
     });
   }
 
@@ -84,7 +88,7 @@ class CmsPostStore {
       return;
     }
 
-    this.post[postData.slug] = postData;
+    this.setPost({ postData });
   }
 
   async fetchLatestPost() {
@@ -144,8 +148,8 @@ class CmsPostStore {
       return;
     }
 
-    this.post[postData.slug] = postData;
-    this.latestPost = postData.slug;
+    this.setPost({ postData });
+    this.setLatestPost({ postData })
   }
 
   async fetchPostSummaryList({ page, pageSize }) {
@@ -178,9 +182,9 @@ class CmsPostStore {
       throw new BlogPostListFetchError(error.message);
     }
 
-    const postsData = data?.data?.posts ?? [];
+    const postSummaryList = data?.data?.posts ?? [];
 
-    this.postSummaryList = postsData;
+    this.setPostSummaryList({ postSummaryList} );
   }
 
   async fetchPostCount() {
@@ -206,7 +210,23 @@ class CmsPostStore {
 
     const postCount = data?.data?.postsCount ?? 0;
 
+    this.setPostCount({ postCount });
+  }
+
+  setPost({ postData }) {
+    this.post[postData.slug] = postData;
+  }
+
+  setLatestPost({ postData }) {
+    this.latestPost = postData.slug;
+  }
+
+  setPostCount({ postCount }) {
     this.postCount = postCount;
+  }
+
+  setPostSummaryList({ postSummaryList }) {
+    this.postSummaryList = postSummaryList;
   }
 }
 
