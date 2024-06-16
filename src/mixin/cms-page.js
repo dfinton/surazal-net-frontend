@@ -12,7 +12,7 @@ export default (SuperClass) =>
 
     async fetchCmsPage({ section }) {
       try {
-        this.cmsPageStore.fetchPage({ section });
+        await this.cmsPageStore.fetchPage({ section });
       } catch (error) {
         console.error(error);
       }

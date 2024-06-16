@@ -1,11 +1,11 @@
 import { html } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
-import cmsLinkStore from "@/store/cms-link";
+import CmsLinkMixin from "@/mixin/cms-link";
 import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
 
-class LinkListBlock extends MobxLitElement {
+class LinkListBlock extends CmsLinkMixin(MobxLitElement) {
   static properties = {
     linkList: {},
     listStyle: {},
@@ -13,38 +13,20 @@ class LinkListBlock extends MobxLitElement {
 
   static styles = [elementStyle, layoutStyle];
 
-  cmsLinkStore;
-
-  connectedCallback() {
+  async connectedCallback() {
     super.connectedCallback();
 
-    this.cmsLinkStore.fetchLink({ link: this.linkList }).catch((error) => {
-      console.error(
-        `An error was encountered fetching link list data for "${this.linkList}":\n`,
-        error.message,
-      );
-    });
+    await this.fetchCmsLink({ link: this.linkList });
   }
 
-  willUpdate(changedProperties) {
+  async willUpdate(changedProperties) {
     if (!changedProperties.size) {
       return;
     }
 
     if (changedProperties.has("linkList")) {
-      this.cmsLinkStore.fetchLink({ link: this.linkList }).catch((error) => {
-        console.error(
-          `An error was encountered fetching link list data for "${this.linkList}":\n`,
-          error.message,
-        );
-      });
+      await this.fetchCmsLink({ link: this.linkList });
     }
-  }
-
-  constructor() {
-    super();
-
-    this.cmsLinkStore = cmsLinkStore;
   }
 
   render() {
