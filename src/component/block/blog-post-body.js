@@ -6,7 +6,9 @@ import ConvertCmsDocumentObjectMixin from "@/mixin/convert-cms-document-object";
 import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
 
-class BlogPostBodyBlock extends CmsPostMixin(ConvertCmsDocumentObjectMixin(MobxLitElement)) {
+class BlogPostBodyBlock extends CmsPostMixin(
+  ConvertCmsDocumentObjectMixin(MobxLitElement),
+) {
   static properties = {
     post: {},
   };

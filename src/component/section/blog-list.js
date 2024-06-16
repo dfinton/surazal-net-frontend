@@ -24,14 +24,20 @@ class BlogListSection extends CmsPostMixin(MobxLitElement) {
 
     this.page = page;
 
-    await this.fetchCmsPostSummaryList({ page: this.page, pageSize: this.pageSize });
+    await this.fetchCmsPostSummaryList({
+      page: this.page,
+      pageSize: this.pageSize,
+    });
   }
 
   async connectedCallback() {
     super.connectedCallback();
 
     await Promise.all([
-      this.fetchCmsPostSummaryList({ page: this.page, pageSize: this.pageSize }),
+      this.fetchCmsPostSummaryList({
+        page: this.page,
+        pageSize: this.pageSize,
+      }),
       this.fetchCmsPostCount(),
     ]);
   }

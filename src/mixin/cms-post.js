@@ -36,4 +36,4 @@ export default (SuperClass) =>
         console.error(error);
       }
     }
-  }
+  };
