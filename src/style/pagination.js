@@ -9,7 +9,7 @@ export default css`
     text-align: center;
     margin: 0 0.125rem 0 0.125rem;
     min-width: 1rem;
-    border-radius: 0.25rem;
+    border-radius: 0.125rem;
     border: 0.125rem outset var(--light-border-color);
   }
 

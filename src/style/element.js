@@ -40,4 +40,27 @@ export default css`
   ul.undecorated-list > li {
     list-style-type: none;
   }
+
+  .images-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .image-frame {
+    padding: 0.125rem;
+    border-radius: 0.125rem;
+    border: 0.125rem outset var(--light-border-color);
+  }
+
+  .image-caption {
+    margin-top: 0.5rem;
+  }
+
+  .image-frame img {
+    display: block;
+  }
 `;

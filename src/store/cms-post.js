@@ -65,10 +65,10 @@ class CmsPostStore {
             createdAt
             fractals {
               slug
+              name
               altText
               thumbnail {
                 slug
-                name
                 file {
                   filesize
                   width
