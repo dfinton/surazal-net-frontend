@@ -5,6 +5,7 @@ import pageStyle from "@/style/page";
 
 import "@/component/section/header";
 import "@/component/section/footer";
+import "@/component/section/fractal-image";
 
 class FractalImagePage extends LitElement {
   static styles = [pageStyle];
@@ -21,6 +22,7 @@ class FractalImagePage extends LitElement {
     return html`
       <div class="root-page">
         <header-section></header-section>
+        <fractal-image-section fractal="${this.fractal}"></fractal-image-section>
         <footer-section></footer-section>
       </div>
     `;

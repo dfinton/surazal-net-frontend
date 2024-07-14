@@ -40,32 +40,34 @@ class FractalImageStore {
 
     try {
       data = await cms(`
-        fractal(
-          where {
-            slug: ${image}
-          }
-        ) {
-          slug
-          altText
-          name
-          thumbnail {
-            file {
-              url
+        {
+          fractal(
+            where: {
+              slug: "deep-green-ovoid-spirals"
             }
-          }
-          small {
-            file {
-              url
+          ) {
+            slug
+            altText
+            name
+            thumbnail {
+              file {
+                url
+              }
             }
-          }
-          medium {
-            file {
-              url
+            small {
+              file {
+                url
+              }
             }
-          }
-          large {
-            file {
-              url
+            medium {
+              file {
+                url
+              }
+            }
+            large {
+              file {
+                url
+              }
             }
           }
         }
