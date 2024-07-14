@@ -5,6 +5,7 @@ import {
   BlogPostDataFetchError,
   BlogPostCountFetchError,
 } from "@/error";
+
 import cms from "@/service/cms";
 
 class CmsPostStore {
@@ -65,14 +66,9 @@ class CmsPostStore {
             createdAt
             fractals {
               slug
-              name
               altText
               thumbnail {
-                slug
                 file {
-                  filesize
-                  width
-                  height
                   url
                 }
               }
@@ -127,12 +123,7 @@ class CmsPostStore {
               slug
               altText
               thumbnail {
-                slug
-                name
                 file {
-                  filesize
-                  width
-                  height
                   url
                 }
               }

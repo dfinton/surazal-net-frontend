@@ -13,7 +13,7 @@ class LinksPage extends LitElement {
     return html`
       <div class="root-page">
         <header-section></header-section>
-        <content-section section="fractals"></content-section>
+        <content-section section="links"></content-section>
         <footer-section></footer-section>
       </div>
     `;

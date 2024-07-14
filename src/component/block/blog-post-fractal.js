@@ -34,7 +34,7 @@ class BlogPostFractalBlock extends CmsPostMixin(MobxLitElement) {
     const fractals = post?.fractals ?? [];
 
     const fractalsContent = fractals.map((fractal) => {
-      const fractalUrl = `/fractals/images?fractal=${fractal.slug}`;
+      const fractalUrl = `/fractals/image?fractal=${fractal.slug}`;
       const fractalImageUrl = fractal.thumbnail?.file?.url;
       const fractalName = fractal.name;
 

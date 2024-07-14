@@ -6,7 +6,9 @@ import ConvertCmsDocumentObjectMixin from "@/mixin/convert-cms-document-object";
 import elementStyle from "@/style/element";
 import layoutStyle from "@/style/layout";
 
-class ContentBlock extends CmsPageMixin(ConvertCmsDocumentObjectMixin(MobxLitElement)) {
+class ContentBlock extends CmsPageMixin(
+  ConvertCmsDocumentObjectMixin(MobxLitElement),
+) {
   static properties = {
     section: {},
   };
@@ -45,7 +47,7 @@ class ContentBlock extends CmsPageMixin(ConvertCmsDocumentObjectMixin(MobxLitEle
       });
     }
 
-    return html` <div class="content-block">${htmlContent}</div> `;
+    return html`<div class="content-block">${htmlContent}</div>`;
   }
 }
 
