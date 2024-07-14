@@ -2,10 +2,9 @@ import { html } from "lit-element";
 import { MobxLitElement } from "@adobe/lit-mobx";
 
 import CmsFractalMixin from "@/mixin/cms-fractal";
-import elementStyle from "@/style/element";
-import layoutStyle from "@/style/layout";
 import sectionStyle from "@/style/section";
 
+import "@/component/block/fractal-list.js";
 import "@/component/block/pagination-controls.js";
 
 class FractalListSection extends CmsFractalMixin(MobxLitElement) {
@@ -14,7 +13,7 @@ class FractalListSection extends CmsFractalMixin(MobxLitElement) {
     pageSize: {},
   };
 
-  static styles = [elementStyle, layoutStyle, sectionStyle];
+  static styles = [sectionStyle];
 
   async connectedCallback() {
     super.connectedCallback();
@@ -55,35 +54,16 @@ class FractalListSection extends CmsFractalMixin(MobxLitElement) {
       </div>
     `;
 
-    const fractalsContent = this.cmsFractalStore.imageSummaryList.map((fractal) => {
-      const fractalUrl = `/fractals/image?fractal=${fractal.slug}`;
-      const fractalImageUrl = fractal.thumbnail?.file?.url;
-      const fractalName = fractal.name;
-
-      return html`
-        <div class="image-frame">
-          <div class="image center">
-            <a href="${fractalUrl}">
-              <img src="${fractalImageUrl}" />
-            </a>
-          </div>
-          <div class="image-caption center">
-            <a href="${fractalUrl}">
-              <h5>${fractalName}</h5>
-            </a>
-          </div>
-        </div>
-      `;
-    });
+    const fractalsContainer = html`
+      <div class="dark-container">
+        <fractal-list-block></fractal-list-block>
+      </div>
+    `;
 
     return html`
       <div class="root-section">
         ${paginationContainer}
-        <div class="dark-container">
-          <div class="images-container content-block">
-            ${fractalsContent}
-          </div>
-        </div>
+        ${fractalsContainer}
         ${paginationContainer}
       </div>
     `;
