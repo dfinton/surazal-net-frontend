@@ -143,7 +143,7 @@ class FractalImageStore {
       throw new FractalImageListFetchError(error.message);
     }
 
-    const imageSummaryList = data?.data?.posts ?? [];
+    const imageSummaryList = data?.data?.fractals ?? [];
 
     this.setImageSummaryList({ imageSummaryList });
   }
