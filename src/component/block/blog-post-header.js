@@ -12,22 +12,6 @@ class BlogPostHeaderBlock extends CmsPostMixin(MobxLitElement) {
 
   static styles = [elementStyle, layoutStyle];
 
-  async connectedCallback() {
-    super.connectedCallback();
-
-    await this.fetchCmsPost({ post: this.post });
-  }
-
-  async willUpdate(changedProperties) {
-    if (!changedProperties.size) {
-      return;
-    }
-
-    if (changedProperties.has("post")) {
-      await this.fetchCmsPost({ post: this.post });
-    }
-  }
-
   render() {
     const post = this.cmsPostStore.post[this.post];
     const title = post?.title;
