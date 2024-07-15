@@ -51,21 +51,29 @@ class FractalImageStore {
             name
             thumbnail {
               file {
+                width
+                height
                 url
               }
             }
             small {
               file {
+                width
+                height
                 url
               }
             }
             medium {
               file {
+                width
+                height
                 url
               }
             }
             large {
               file {
+                width
+                height
                 url
               }
             }

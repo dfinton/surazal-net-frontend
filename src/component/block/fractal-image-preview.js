@@ -16,13 +16,17 @@ class FractalImagePreviewBlock extends CmsFractalMixin(MobxLitElement) {
     const image = this.cmsFractalStore.image[this.fractal];
 
     let imagePreview;
+    let altText = "No preview image found"
 
-    if (image) {
-      const altText = image.altText;
-      const imageUrl = image.small?.file.url;
+    if (image && image.small) {
+      const imageUrl = image.small.file.url;
+
+      altText = image.altText;
 
       imagePreview = html`
-        <img class="preview" alt="${altText}" src="${imageUrl}" />
+        <a href="${imageUrl}">
+          <img class="preview" alt="${altText}" src="${imageUrl}" />
+        </a>
       `;
     }
 
