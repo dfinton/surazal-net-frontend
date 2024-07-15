@@ -16,7 +16,7 @@ class FractalListBlock extends CmsFractalMixin(MobxLitElement) {
 
       return html`
         <div class="image-frame">
-          <div class="image center">
+          <div class="image flex-center">
             <a href="${fractalUrl}">
               <img src="${fractalImageUrl}" />
             </a>

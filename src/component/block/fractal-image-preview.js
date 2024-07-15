@@ -24,14 +24,18 @@ class FractalImagePreviewBlock extends CmsFractalMixin(MobxLitElement) {
       altText = image.altText;
 
       imagePreview = html`
-        <a href="${imageUrl}">
-          <img class="preview" alt="${altText}" src="${imageUrl}" />
-        </a>
+        <div class="image-frame">
+          <div class="image">
+            <a href="${imageUrl}">
+              <img class="preview" alt="${altText}" src="${imageUrl}" />
+            </a>
+          </div>
+        </div>
       `;
     }
 
     return html`
-      <div class="content-block center">${imagePreview}</div>
+      <div class="content-block flex-center">${imagePreview}</div>
     `;
   }
 }

@@ -24,7 +24,7 @@ class BlogPostFractalBlock extends CmsPostMixin(MobxLitElement) {
 
       return html`
         <div class="image-frame">
-          <div class="image center">
+          <div class="image flex-center">
             <a href="${fractalUrl}">
               <img src="${fractalImageUrl}" />
             </a>

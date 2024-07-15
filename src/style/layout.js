@@ -25,4 +25,19 @@ export default css`
   .right {
     text-align: right;
   }
+
+  .flex-left {
+    display: flex;
+    justify-content: left;
+  }
+
+  .flex-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .flex-right {
+    display: flex;
+    justify-content: right;
+  }
 `;
