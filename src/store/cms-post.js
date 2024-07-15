@@ -66,6 +66,7 @@ class CmsPostStore {
             createdAt
             fractals {
               slug
+              name
               altText
               thumbnail {
                 file {
@@ -121,6 +122,7 @@ class CmsPostStore {
             createdAt
             fractals {
               slug
+              name
               altText
               thumbnail {
                 file {
