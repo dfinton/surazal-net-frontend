@@ -43,16 +43,20 @@ class FractalListSection extends CmsFractalMixin(MobxLitElement) {
   }
 
   render() {
-    const paginationContainer = html`
-      <div class="dark-container">
-        <pagination-controls-block
-          page="${this.page}"
-          pageSize="${this.pageSize}"
-          total="${this.cmsFractalStore.imageCount}"
-          @pagination-click="${this._handlePaginationClickEvent}"
-        ></pagination-controls-block>
-      </div>
-    `;
+    let paginationContainer;
+
+    if (this.cmsFractalStore.imageCount > this.pageSize) {
+      paginationContainer = html`
+        <div class="dark-container">
+          <pagination-controls-block
+            page="${this.page}"
+            pageSize="${this.pageSize}"
+            total="${this.cmsFractalStore.imageCount}"
+            @pagination-click="${this._handlePaginationClickEvent}"
+          ></pagination-controls-block>
+        </div>
+      `;
+    }
 
     const fractalsContainer = html`
       <div class="dark-container">

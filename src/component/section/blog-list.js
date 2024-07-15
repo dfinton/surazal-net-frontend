@@ -43,16 +43,20 @@ class BlogListSection extends CmsPostMixin(MobxLitElement) {
   }
 
   render() {
-    const paginationContainer = html`
-      <div class="dark-container">
-        <pagination-controls-block
-          page="${this.page}"
-          pageSize="${this.pageSize}"
-          total="${this.cmsPostStore.postCount}"
-          @pagination-click="${this._handlePaginationClickEvent}"
-        ></pagination-controls-block>
-      </div>
-    `;
+    let paginationContainer;
+
+    if (this.cmsPostStore.postCount > this.pageSize) {
+      const paginationContainer = html`
+        <div class="dark-container">
+          <pagination-controls-block
+            page="${this.page}"
+            pageSize="${this.pageSize}"
+            total="${this.cmsPostStore.postCount}"
+            @pagination-click="${this._handlePaginationClickEvent}"
+          ></pagination-controls-block>
+        </div>
+      `;
+    }
 
     const postSummaryContainers = this.cmsPostStore.postSummaryList.map(
       (postSummary) => {
