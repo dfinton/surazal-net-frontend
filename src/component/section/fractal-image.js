@@ -4,6 +4,8 @@ import { MobxLitElement } from "@adobe/lit-mobx";
 import CmsFractalMixin from "@/mixin/cms-fractal";
 import sectionStyle from "@/style/section";
 
+import "@/component/block/fractal-image-preview";
+
 class FractalImageSection extends CmsFractalMixin(MobxLitElement) {
   static properties = {
     fractal: {},
@@ -29,7 +31,11 @@ class FractalImageSection extends CmsFractalMixin(MobxLitElement) {
 
   render() {
     return html`
-      <div>Hey yo!</div>
+      <div class="root-section">
+        <div class="dark-container">
+          <fractal-image-preview-block fractal="${this.fractal}"></fractal-image-preview-block>
+        </div>
+      </div>
     `;
   }
 }

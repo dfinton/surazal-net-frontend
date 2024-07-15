@@ -43,7 +43,7 @@ class FractalImageStore {
         {
           fractal(
             where: {
-              slug: "deep-green-ovoid-spirals"
+              slug: "${image}"
             }
           ) {
             slug

@@ -63,4 +63,9 @@ export default css`
   .image-frame img {
     display: block;
   }
+
+  img.preview {
+    max-width: 100%;
+    max-height: 100%;
+  }
 `;
